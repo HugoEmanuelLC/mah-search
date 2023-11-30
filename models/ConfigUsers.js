@@ -5,22 +5,12 @@ const userSchema = new mongoose.Schema({
     firstname: {
         type: String,
         required: [true, 'Please enter your first name'],
+        lowercase: true
     },
     lastname: {
         type: String,
         required: [true, 'Please enter your last name'],
-    },
-    url_linkedin: {
-        type: String,
-    },
-    url_github: {
-        type: String,
-    },
-    url_photoprofil: {
-        type: String,
-    },
-    url_cv: {
-        type: String,
+        lowercase: true
     },
     email: {
         type: String,
@@ -34,10 +24,23 @@ const userSchema = new mongoose.Schema({
         required: [true, 'Please enter a password'],
         minlength: [6, 'Minimum password length is 6 characters'],
     },
+    url_linkedin: {
+        type: String,
+    },
+    url_github: {
+        type: String,
+    },
+    url_photoprofil: {
+        type: String,
+    },
+    url_cv: {
+        type: String,
+    },
     companies: [{
         jobtitle: {
             type: String,
             required: [true, 'Please enter a job title'],
+            lowercase: true
         },
         website: {
             type: String,
@@ -45,30 +48,39 @@ const userSchema = new mongoose.Schema({
         employercontact: {
             name: {
                 type: String,
+                lowercase: true
             },
             email: {
                 type: String,
+                unique: true,
+                lowercase: true,
+                validate: [isEmail, 'Please enter a valid email'],
             },
             phone: {
                 type: String,
             },
             address: {
                 type: String,
+                lowercase: true
             },
         },
-        origin: {
+        origin: [
+            {
             type: String,
-        },
-        status: {
+            }
+        ],
+        status: [
+            {
             type: String,
-        },
-        comments: [{
+            }
+        ],
+        comments: [
+            {
             title: String,
             content: String,
-        }],
+            }
+        ],
     }],
 });
-
-
 
 module.exports = userSchema;
