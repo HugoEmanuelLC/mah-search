@@ -15,7 +15,7 @@ app.use(cookieParser())
 app.set('view engine', 'ejs');
 
 // database connection
-const dbURI = 'mongodb+srv://helc85:lu4zuB0Xbo9ntlpn@cluster0.5buyeii.mongodb.net/node-auth';
+const dbURI = 'mongodb+srv://helc85:lu4zuB0Xbo9ntlpn@cluster0.5buyeii.mongodb.net/mah-search';
 mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex:true })
   .then((result) => app.listen(3000))
   .catch((err) => console.log(err));
