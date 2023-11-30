@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const { isEmail } = require('validator');
 const bcrypt = require('bcrypt');
 
-const { ConfigUsers } = require('./ConfigUsers.js');
+const  userSchema  = require('./ConfigUsers');
 
 
 // avant injection dans la base de donnees

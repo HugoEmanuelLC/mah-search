@@ -1,21 +1,74 @@
 const mongoose = require('mongoose');
 const { isEmail } = require('validator');
 
-const Schema = new mongoose.Schema({
-    email:{
+const userSchema = new mongoose.Schema({
+    firstname: {
         type: String,
-        require: [true, 'Please enter an email'],
+        required: [true, 'Please enter your first name'],
+    },
+    lastname: {
+        type: String,
+        required: [true, 'Please enter your last name'],
+    },
+    url_linkedin: {
+        type: String,
+    },
+    url_github: {
+        type: String,
+    },
+    url_photoprofil: {
+        type: String,
+    },
+    url_cv: {
+        type: String,
+    },
+    email: {
+        type: String,
+        required: [true, 'Please enter an email'],
         unique: true,
         lowercase: true,
-        validate: [isEmail, 'Please enter a valid email']
+        validate: [isEmail, 'Please enter a valid email'],
     },
     password: {
         type: String,
-        require: [true, 'Please enter an password'],
-        minLength: [6, 'Minimun password length is 6 characters']
-    }
+        required: [true, 'Please enter a password'],
+        minlength: [6, 'Minimum password length is 6 characters'],
+    },
+    companies: [{
+        jobtitle: {
+            type: String,
+            required: [true, 'Please enter a job title'],
+        },
+        website: {
+            type: String,
+        },
+        employercontact: {
+            name: {
+                type: String,
+            },
+            email: {
+                type: String,
+            },
+            phone: {
+                type: String,
+            },
+            address: {
+                type: String,
+            },
+        },
+        origin: {
+            type: String,
+        },
+        status: {
+            type: String,
+        },
+        comments: [{
+            title: String,
+            content: String,
+        }],
+    }],
 });
 
-const User2 = mongoose.model('user2', Schema);
 
-module.exports = User2;
+
+module.exports = userSchema;
