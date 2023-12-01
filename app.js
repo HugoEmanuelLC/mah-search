@@ -1,5 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const PORT = process.env.PORT || 3001;
+const dbURI = process.env.MONGODB_URI || process.env.DB_URI;
 const authRoutes = require('./routes/authRoutes');
 const cookieParser = require('cookie-parser');
 const { requireAuth, checkUser } = require('./middleware/authMiddleware');
@@ -15,9 +17,9 @@ app.use(cookieParser())
 app.set('view engine', 'ejs');
 
 // database connection
-const dbURI = 'mongodb+srv://mateo:12345@cluster0.fjybhh6.mongodb.net/mah-search';
+
 mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex:true })
-  .then((result) => app.listen(3000))
+  .then((result) => app.listen(PORT))
   .catch((err) => console.log(err));
 
 // routes
@@ -26,5 +28,5 @@ app.get('/', (req, res) => res.render('home'));
 app.get('/smoothies', requireAuth, (req, res) => res.render('smoothies'));
 app.use(authRoutes);
 
-
+module.exports = app;
 
