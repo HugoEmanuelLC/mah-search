@@ -1,16 +1,31 @@
 <%- include('partials/header'); -%>
 
 <form>
-    <h2>Sign up</h2>
+    <h2>Register</h2>
+    
+    <label for="firstname">Firstname</label>
+    <input type="text" name="firstname" required>
+
+    <label for="lastname">Llastname</label>
+    <input type="text" name="lastname" required>
+
+    <label for="github">GgitHub</label>
+    <input type="text" name="github" required>
+
     <label for="email">Email</label>
     <input type="text" name="email" required>
     <div class="email error"></div>
 
+    
     <label for="password">Password</label>
     <input type="password" name="password" required>
     <div class="password error"></div>
 
-    <button>Sign up</button>
+    <label for="confirmepassword">Confirme password</label>
+    <input type="confirmepassword" name="confirmepassword" required>
+    <div class="confirmepassword error"></div>
+
+    <button>Register</button>
 </form>
 
 <script>
