@@ -19,8 +19,8 @@
     <label for="profilepicture">Profile picture</label>
     <input type="file" name="profilepicture">
     
-    <label for="cvpdf">CV (pdf)</label>
-    <input type="file" name="cvpdf">
+    <label for="cv">CV (pdf)</label>
+    <input type="file" name="cv">
 
     <label for="password">Password</label>
     <input type="password" name="password" required>
@@ -52,18 +52,33 @@
         const password = form.password.value
         const confirmpassword = form.confirmpassword.value
 
+        const firstname = form.firstname.value
+        const lastname = form.lastname.value
+        const github = form.github.value
+        const profilepicture = form.profilepicture.value
+        const cv = form.cv.value
+
         if (password !== confirmpassword) {
             confirmPasswordError.textContent = "Passwords do not match"
 
         } else {
-            
+            let infoUsers = {
+                firstname,
+                lastname,
+                github,
+                profilepicture,
+                cv,
+                email,
+                password,
+                confirmpassword
+            }
             try {
             const res = await fetch('/signup', {
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 method: 'POST',
-                body: JSON.stringify({email, password})
+                body: JSON.stringify({infoUsers})
             });
 
             const data = await res.json()
