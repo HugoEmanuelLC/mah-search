@@ -24,18 +24,10 @@ const userSchema = new mongoose.Schema({
         required: [true, 'Please enter a password'],
         minlength: [6, 'Minimum password length is 6 characters'],
     },
-    url_linkedin: {
-        type: String,
-    },
-    url_github: {
-        type: String,
-    },
-    url_photoprofil: {
-        type: String,
-    },
-    url_cv: {
-        type: String,
-    }
+    linkedin: {type: String},
+    github: {type: String},
+    photoprofil: {type: String},
+    cv: {type: String},
 });
 
 module.exports = userSchema;

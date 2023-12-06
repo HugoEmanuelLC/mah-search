@@ -1,2 +1,2 @@
 # mah-search
-Search jobs applications
+Search jobs application
