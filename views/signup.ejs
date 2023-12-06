@@ -62,7 +62,7 @@
             confirmPasswordError.textContent = "Passwords do not match"
 
         } else {
-            let infoUsers = {
+            const infoUsers = {
                 firstname,
                 lastname,
                 github,
@@ -78,7 +78,16 @@
                     'Content-Type': 'application/json'
                 },
                 method: 'POST',
-                body: JSON.stringify({infoUsers})
+                body: JSON.stringify({
+                    firstname,
+                    lastname,
+                    github,
+                    profilepicture,
+                    cv,
+                    email,
+                    password,
+                    confirmpassword
+                })
             });
 
             const data = await res.json()

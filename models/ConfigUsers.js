@@ -35,52 +35,7 @@ const userSchema = new mongoose.Schema({
     },
     url_cv: {
         type: String,
-    },
-    companies: [{
-        jobtitle: {
-            type: String,
-        //    required: [true, 'Please enter a job title'],
-            lowercase: true
-        },
-        website: {
-            type: String,
-        },
-        employercontact: {
-            name: {
-                type: String,
-                lowercase: true
-            },
-            email: {
-                type: String,
-                unique: true,
-                lowercase: true,
-                validate: [isEmail, 'Please enter a valid email'],
-            },
-            phone: {
-                type: String,
-            },
-            address: {
-                type: String,
-                lowercase: true
-            },
-        },
-        origin: [
-            {
-            type: String,
-            }
-        ],
-        status: [
-            {
-            type: String,
-            }
-        ],
-        comments: [
-            {
-            title: String,
-            content: String,
-            }
-        ],
-    }],
+    }
 });
 
 module.exports = userSchema;
