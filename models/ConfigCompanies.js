@@ -20,6 +20,7 @@ const companiesSchema = new mongoose.Schema({
         },
         emailContact: {
             type: String,
+            required: false,
             lowercase: true,
             validate: [isEmail, 'Please enter a valid email'],
         },
@@ -28,7 +29,7 @@ const companiesSchema = new mongoose.Schema({
 
     }],
     origin: [{type: String}],
-    status: [{type: String}],
+    statusCompanie: [{type: String}],
     comments: {content: String},
 
 });
