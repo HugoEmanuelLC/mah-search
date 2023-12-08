@@ -1,5 +1,6 @@
 const express = require('express');
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
+const MongoClient = require('mongodb').MongoClient;
 require('dotenv').config(); 
 const PORT = process.env.PORT || 3001;
 // const dbURI = process.env.MONGODB_URI || process.env.DB_URI
@@ -22,9 +23,16 @@ app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 
 // database connection
-mongoose.connect(dbURI)
-  .then((result) => app.listen(PORT))
-  .catch((err) => console.log(err));
+const useNewUrlParser = true;
+const useUnifiedTopology = true;
+MongoClient.connect(dbURI, { useNewUrlParser, useUnifiedTopology }, (err, client) =>{
+  if (err) {
+    console.error(err);
+  } else {
+    app.listen(PORT)
+    console.log("server en ligne");
+  }
+})
 
 // routes
 app.get('*', checkUser);

@@ -10,32 +10,36 @@ const User = require("../models/User");
 // }
 
 module.exports.add_companie = async (req, res) => {
-    const dataEmail = await res.json()
-    console.log(dataEmail.locals);
-    // let i = new ObjectId(dataEmail.locals.user._id)
-    // i = JSON.stringify(i)
-    // req.body.id_user = i
+    let i = res.locals.user._id
+    // const obj = new ObjectId()
+    // const idString = obj.toHexString(i)
+    // console.log(idString);
 
-    // let companieInfos = {
-    //         jobTitle,
-    //         website,
-    //         employerContact:[{
-    //             nameContact,
-    //             emailContact,
-    //             phone,
-    //             Address
-    //         }],
-    //         origin,
-    //         statusCompanie,
-    //         comments
-    //     } = await req.body;
+    let companieInfos = {
+            jobTitle,
+            website,
+            employerContact:[{
+                nameContact,
+                emailContact,
+                phone,
+                Address
+            }],
+            origin,
+            statusCompanie,
+            comments
+        } = req.body;
 
-    //     const companie = await Companies.create(companieInfos)
-    //     .then(resultat => {console.log(resultat)})
-    //     .catch(err => {
-    //         console.log(err)
-    //     })
-        res.status(201).end();
+        companieInfos.id_user = i
+
+        console.log(companieInfos);
+
+        const companie = await Companies.create(companieInfos)
+        .then(resultat => {console.log(resultat)})
+        .catch(err => {
+            console.log(err)
+        })
+        res.status(201).json({test: "companie._id"})
+        res.end();
 }
 
 
