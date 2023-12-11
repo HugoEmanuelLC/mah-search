@@ -1,6 +1,5 @@
 const express = require('express');
-// const mongoose = require('mongoose');
-const MongoClient = require('mongodb').MongoClient;
+const mongoose = require('mongoose');
 require('dotenv').config(); 
 const PORT = process.env.PORT || 3001;
 // const dbURI = process.env.MONGODB_URI || process.env.DB_URI
@@ -23,22 +22,16 @@ app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 
 // database connection
-const useNewUrlParser = true;
-const useUnifiedTopology = true;
-MongoClient.connect(dbURI, { useNewUrlParser, useUnifiedTopology }, (err, client) =>{
-  if (err) {
-    console.error(err);
-  } else {
-    app.listen(PORT)
-    console.log("server en ligne");
-  }
-})
+mongoose.connect(dbURI)
+  .then((result) => app.listen(PORT))
+  .catch((err) => console.log(err));
 
 // routes
 app.get('*', checkUser);
 app.get('/', (req, res) => res.render('home'));
 app.get('/smoothies', requireAuth, (req, res) => res.render('smoothies'));
+app.get('/add-companie', requireAuth, (req, res) => res.render('addCompanie'));
 app.use(authRoutes);
 app.use(checkUser, companieRouter);
 
-//module.exports = app
+module.exports = app
