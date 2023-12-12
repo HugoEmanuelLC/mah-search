@@ -2,8 +2,6 @@ const { ObjectId } = require("mongodb");
 const Job = require("../models/ConfigJobs")
 const User = require("../models/User");
 
-
-
 // handle errors
 const handleErrors = (err) => {
     let errors = { email: ''};
@@ -26,7 +24,6 @@ module.exports.createJob = async (req, res) => {
     let jobInfos = {
         jobTitle,
         website,
-        company,
         nameContact,
         emailContact,
         phone,
@@ -55,12 +52,13 @@ module.exports.createJob = async (req, res) => {
 
 
 module.exports.listJobs = async (req, res) => {
+    console.log(res);
     try {
-        const userId = res.locals.user._id;
-        const jobs = await Job.find({ id_user: userId });
+        const id = res.locals.user._id
+        const jobs = await Job.find({id_user: id});
         res.status(200).json(jobs);
     } catch (err) {
-        res.status(500).json({ error: "Internal server error" });
+        res.status(500).json({ error: "Failed to retrieve jobs" });
     }
 }
 
@@ -74,12 +72,11 @@ module.exports.JobItem = async (req, res) => {
     }
 };
 
-module.exports.JobUpdate = async (req, res) => {
+module.exports.updateJob = async (req, res) => {
     const jobId = req.params.id;
     const jobInfos = {
         jobTitle,
         website,
-        company,
         nameContact,
         emailContact,
         phone,
@@ -89,18 +86,18 @@ module.exports.JobUpdate = async (req, res) => {
         comments
     } = req.body;
     try {
-        const job = await Job.findByIdAndUpdate(jobId, jobInfos);
+        const job = await Job.findByIdAndUpdate(jobId, jobInfos, { new: true });
         res.status(200).json(job);
     } catch (err) {
         res.status(500).json({ error: "Job not found" });
     }
 }
 
-module.exports.JobDelete = async (req, res) => {    
+module.exports.deleteJob = async (req, res) => {
     const jobId = req.params.id;
     try {
         const job = await Job.findByIdAndDelete(jobId);
-        res.status(200).json(job);
+        res.status(200).json({msg: "Job deleted successfully"});
     } catch (err) {
         res.status(500).json({ error: "Job not found" });
     }

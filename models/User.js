@@ -4,6 +4,19 @@ const bcrypt = require('bcrypt');
 
 const userSchema = require('./ConfigUsers');
 
+userSchema.pre("updateOne", async function (next) {
+  const update = this.getUpdate() // {password: "..."}
+  if (update.password) {
+    const passwordHash = await bcrypt.hash(update.password, 10);
+    // this.setUpdate({ $set: { 
+    //     password: passwordHash, 
+    //     confirmpw: undefined 
+    //   } 
+    // });
+  }
+  next()
+});
+
 // fire a function before doc saved to db
 userSchema.pre('save', async function(next) {
   const salt = await bcrypt.genSalt();

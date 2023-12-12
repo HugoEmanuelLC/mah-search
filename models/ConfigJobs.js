@@ -5,7 +5,7 @@ const jobSchema = new mongoose.Schema({
     id_user: { type: String },
     jobTitle: {
         type: String,
-        required: [false, 'Please enter your first name'],
+        required: [true, 'Please enter your first name'],
         lowercase: true
     },
     company: {
