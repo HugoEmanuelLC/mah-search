@@ -10,7 +10,7 @@ module.exports.userProfile = (req, res) => {
 }
 
 module.exports.updateUserProfile = async (req, res, next) => {
-    console.log(res.locals.user._id);
+    //console.log(res.locals.user._id);
     
     try {
         let userInfos = {
@@ -41,23 +41,7 @@ module.exports.updateUserProfile = async (req, res, next) => {
 
 module.exports.deleteUserProfile = async (req, res) => {
     try {
-        const { id } = req.params;
-
-        // if (Job !== null) {
-        //     // Delete the jobs associated with the user
-        //     console.log("start if");
-        //     await Job.deleteMany({ id_user: id });
-        //     console.log("middle if");
-        //     res.status(200).json({ message: 'Jobs deleted successfully' });
-        //     console.log("end if");
-
-        // } else {
-        //     console.log("start else");
-
-        //     res.status(404).json({ message: 'Jobs not found' });
-
-        //     console.log("end else");
-        // }
+        const id = await res.locals.user._id;
 
         // Delete the jobs associated with the user
         const jobsDeleted = await Job.deleteMany({ id_user: id });
