@@ -1,6 +1,8 @@
 const User = require('../models/User');
 const Job = require('../models/ConfigJobs');
+const authController = require('./authController');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 module.exports.userProfile = (req, res) => {
     console.log(res.locals.user);
@@ -60,6 +62,8 @@ module.exports.deleteUserProfile = async (req, res) => {
         if (jobsDeleted.deletedCount === 0) {
             return res.status(404).json({ message: 'Jobs not found, but user deleted successfully' });
         }
+
+        authController.logout_get;
 
         return res.status(200).json({ message: 'User and associated jobs deleted successfully' });
     } catch (err) {
