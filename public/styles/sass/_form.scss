@@ -29,7 +29,13 @@
             color: $color_50;
             padding: 10px;
             width: 100%;
+            border-radius: 10px;
             cursor: pointer;
+
+            &:hover{
+                background-color: $color_10;
+                color: $color_30;
+            }
         }
 
         p{

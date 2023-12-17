@@ -91,6 +91,7 @@ section {
 
 header {
   position: relative;
+  text-transform: capitalize;
 }
 @media screen and (min-width: 1200px) {
   header {
@@ -110,16 +111,16 @@ header .container {
     padding: 0 0;
   }
 }
-header .container .photoUser {
+header .container .bloc_photoUser .photoUser {
   border: solid 1px white;
   height: 50px;
   width: 50px;
   border-radius: 50%;
-  margin: 10px 0 0;
+  margin: 10px auto 0;
   overflow: hidden;
 }
 @media screen and (min-width: 1200px) {
-  header .container .photoUser {
+  header .container .bloc_photoUser .photoUser {
     margin: 30px 0;
     height: 80px;
     width: 80px;
@@ -266,7 +267,12 @@ header .container .a_logout:hover {
   color: white;
   padding: 10px;
   width: 100%;
+  border-radius: 10px;
   cursor: pointer;
+}
+.loginAnSignup form button:hover {
+  background-color: goldenrod;
+  color: red;
 }
 .loginAnSignup form p {
   font-size: 12px;
@@ -274,4 +280,22 @@ header .container .a_logout:hover {
 .loginAnSignup form p a {
   color: red;
   text-decoration: underline;
+}
+
+.bloc_filters {
+  background-color: rgb(235, 235, 235);
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin: 20px 0;
+}
+.bloc_filters .titre {
+  margin: auto;
+}
+.bloc_filters .filters {
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 5%;
 }/*# sourceMappingURL=style.css.map */

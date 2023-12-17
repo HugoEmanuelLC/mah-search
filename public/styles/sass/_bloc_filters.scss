@@ -1,0 +1,17 @@
+.bloc_filters{
+    background-color: rgb(235, 235, 235);
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin: 20px 0;
+
+    .titre{
+        margin: auto;
+    }
+
+    .filters{
+        padding: 10px;
+        @include Dfx_JCc_AIfs;
+        gap: 5%;
+    }
+}

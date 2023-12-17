@@ -16,8 +16,11 @@
     <header>
       <div class="container">
           <% if (user) { %>
-            <div class="photoUser">
-              <img src="https://blenderartists.org/uploads/default/optimized/4X/6/6/e/66ed542140d11c5ab60c5cd22efca90b2415a022_2_768x1024.jpeg" alt="">
+            <div class="bloc_photoUser">
+              <p><%= user.firstname %> <%= user.lastname %></p>
+              <div class="photoUser">
+                <img src="<%= user.photoprofil %>" alt="">
+              </div>
             </div>
             <nav>
               <input type="checkbox" name="menu" id="menu">
@@ -32,10 +35,13 @@
 
             <a class="a_logout" href="/logout"><i class='bx bx-log-out-circle'></i> &nbsp; Log out</a>
 
-          <% } else { %>  
-
-            <div class="photoUser">
-              <img src="https://st2.depositphotos.com/1002277/5515/i/450/depositphotos_55150353-stock-photo-admin-cubics.jpg" alt="">
+          <% } else { %> 
+            
+            <div class="bloc_photoUser">
+              <p></p>
+              <div class="photoUser">
+                <img src="https://st2.depositphotos.com/1002277/5515/i/450/depositphotos_55150353-stock-photo-admin-cubics.jpg" alt="">
+              </div>
             </div>
             <nav> 
               <ul>
