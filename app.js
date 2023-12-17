@@ -29,7 +29,7 @@ mongoose.connect(dbURI)
 
 // routes
 app.get('*', checkUser);
-app.get('/', (req, res) => res.render('home'));
+app.get('/', (req, res) => {res.locals.user ? res.render('home') : res.render('login')});
 app.get('/viewJobs', requireAuth, (req, res) => res.render('viewJobs'));
 app.use(authRoutes);
 app.use(checkUser, jobsRouter);

@@ -61,21 +61,29 @@ body {
 
 main {
   color: black;
-  padding: 10px;
+}
+@media screen and (max-width: 1199px) {
+  main {
+    padding: 5px;
+  }
 }
 main .container {
   background-color: white;
   height: 100%;
   width: 100%;
-  padding: 10px;
-  border-radius: 30px 30px 0 0;
+  padding: 20px;
+  border-radius: 50px 50px 0 0;
   display: grid;
   grid-template-columns: minmax(5vw, 1fr) repeat(12, minmax(11px, 92.5px)) minmax(5vw, 1fr);
 }
 @media screen and (min-width: 1200px) {
   main .container {
-    border-radius: 30px 0 0 30px;
+    border-radius: 50px 0 0 50px;
   }
+}
+
+section {
+  grid-column: 1/-1;
 }
 
 header {
@@ -100,9 +108,11 @@ header .container {
   }
 }
 header .container .photoUser {
+  border: solid 1px white;
   height: 50px;
   width: 50px;
   border-radius: 50%;
+  margin: 10px 0 0;
   overflow: hidden;
 }
 @media screen and (min-width: 1200px) {
@@ -112,16 +122,12 @@ header .container .photoUser {
     width: 80px;
   }
 }
-header .container nav {
-  flex: 1;
-}
 @media screen and (min-width: 1200px) {
   header .container nav {
     width: 100%;
   }
 }
 header .container nav ul {
-  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -160,10 +166,18 @@ header .container nav ul li a {
 header .container nav ul li a:hover {
   color: rgb(211, 36, 36);
 }
+header .container .a_logout {
+  border: solid 3px yellow;
+}
 @media screen and (min-width: 1200px) {
   header .container .a_logout {
     position: absolute;
     bottom: 20px;
+    width: 100%;
+    padding: 5px 10px;
+  }
+  header .container .a_logout:hover {
+    color: rgb(211, 36, 36);
   }
 }
 
@@ -247,5 +261,7 @@ header .container nav ul li a:hover {
 
 form {
   display: flex;
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
 }/*# sourceMappingURL=style.css.map */

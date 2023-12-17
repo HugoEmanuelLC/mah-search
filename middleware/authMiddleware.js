@@ -29,6 +29,7 @@ const checkUser = (req, res, next) => {
     jwt.verify(token, 'net ninja secret', async (err, decodedToken) => {
       if (err) {
         res.locals.user = null;
+        // res.redirect('login');
         next();
       } else {
         let user = await User.findById(decodedToken.id);
