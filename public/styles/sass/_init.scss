@@ -4,6 +4,7 @@
     box-sizing: border-box;
     font-family: 'Inter', sans-serif;
     scroll-behavior: smooth;
+    transition: 0.2s;
 }
 a{
     text-decoration: none;
@@ -20,7 +21,7 @@ img{
 
 /* SCROLLBAR */
 ::-webkit-scrollbar{
-    background-color: black;
+    background-color: $color_60;
     pointer-events: visible;
     width: 5px;
     height: 5px;
@@ -34,5 +35,5 @@ img{
     border-radius: 10px;
 }
 ::-webkit-scrollbar-thumb:hover {
-    background-color: goldenrod;
+    background-color: $color_10;
 }

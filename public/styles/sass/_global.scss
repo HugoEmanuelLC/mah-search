@@ -7,7 +7,8 @@ body{
     // @include borderTest(blue);
     max-width: 1440px;
     margin: 0 auto;
-    min-height: 100vh;
+    height: 100vh;
+    overflow: hidden;
     @include Larges{
         display: flex;
     };
@@ -17,7 +18,7 @@ main{
     color: black;
     // padding: 10px;
     @include Larges_max{
-        padding: 5px;
+        padding: 8px;
     };
     
     .container{
@@ -27,6 +28,7 @@ main{
         width: 100%;
         padding: 20px;
         border-radius: 50px 50px 0 0 ;
+        overflow-y: scroll;
         @include container;
         @include Larges{
             border-radius: 50px 0 0 50px;
@@ -35,5 +37,7 @@ main{
 }
 
 section{
+    // @include borderTest(red);
     grid-column: 1/-1;
+
 }
