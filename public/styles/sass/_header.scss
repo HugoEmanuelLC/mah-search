@@ -1,0 +1,80 @@
+header{
+    // @include borderTest(white);
+    position: relative;
+    @include Larges{
+        width: 250px;
+    };
+    
+    .container{
+        @include Dfx_JCsa_AIc;
+        padding: 0 20px;
+        @include Larges{
+            flex-direction: column;
+            justify-content: center;
+            padding: 0 0;
+        };
+
+        .photoUser{
+            // @include borderTest(white);
+            height: 50px;
+            width: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+            
+            @include Larges{
+                margin: 30px 0;  
+                height: 80px;
+                width: 80px;  
+            };
+        }
+
+        nav{
+            // @include borderTest(blue);
+            flex: 1;
+            @include Larges{  
+                width: 100%;
+            }
+            
+            ul{
+                // @include borderTest(red);
+                width: 100%;
+                @include Dfx_JCc_AIc;
+                @include Larges{
+                    flex-direction: column;
+                };
+                
+                li{
+                    // @include borderTest(green);
+                    @include Dfx_JCc_AIc;
+                    @include Larges{
+                        height: 100%;
+                        width: 100%;
+                    };
+
+                    a{
+                        // @include borderTest(yellow);
+                        color: white;
+                        height: 100%;
+                        width: 100%;
+                        padding: 5px 20px;
+                        @include Dfx_JCc_AIc;
+                        @include Larges{
+                            padding: 10px;
+                            justify-content: flex-start;
+                        };
+                        &:hover{
+                            color: $color_10;
+                        }
+                    }
+                }
+            }
+        }
+
+        .a_logout{
+            @include Larges{
+                position: absolute;
+                    bottom: 20px;
+            };
+        }
+    }
+}

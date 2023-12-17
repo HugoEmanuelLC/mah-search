@@ -1,22 +1,50 @@
-<html lang="en">
+<html lang="fr">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>JOB TRACKER</title>
-  <link rel="stylesheet" href="/styles.css">
+  <!-- ICONS -->
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+  <link rel="stylesheet" href="/styles/style.css">
+  <title>Document</title>
 </head>
+
+
 <body>
-  <nav>
-    <h1><a href="/">JOB TRACKER</a></h1>
-    <ul>
-      <% if (user) { %>
-        <li>Welcome, <%= user.firstname %> <%= user.lastname %></li>
-        <li><a href="/user-profile">My profile</a></li>
-        <li><a href="/logout">Log out</a></li>
-      <% } else { %>
-        <li><a href="/login">Log in</a></li>
-        <li><a href="/signup" class="btn">Sign up</a></li>
-      <% } %>
-    </ul>
-  </nav>
-  
+  <div id="page">
+    <header>
+      <div class="container">
+          <% if (user) { %>
+            <div class="photoUser">
+              <img src="https://blenderartists.org/uploads/default/optimized/4X/6/6/e/66ed542140d11c5ab60c5cd22efca90b2415a022_2_768x1024.jpeg" alt="">
+            </div>
+            <nav>
+              <ul>
+                <li><a href="/"><i class='bx bxs-home'></i> &nbsp; Home</a></li>
+                <li><a href="/user-profile"><i class='bx bxs-user'></i> &nbsp; Profile</a></li>
+                <li><a href="/create-job"><i class='bx bx-add-to-queue'></i> &nbsp; Create Job</a></li>
+              </ul>
+            </nav>
+
+            <a class="a_logout" href="/logout"><i class='bx bx-log-out-circle'></i> &nbsp; Log out</a>
+
+          <% } else { %>  
+
+            <div class="photoUser">
+              <img src="https://st2.depositphotos.com/1002277/5515/i/450/depositphotos_55150353-stock-photo-admin-cubics.jpg" alt="">
+            </div>
+            <nav> 
+              <ul>
+                <li><a href="/login">Log in</a></li>
+                <li><a href="/signup" class="btn">Sign up</a></li>
+              </ul>
+            </nav>
+          <% } %>
+      </div>
+    </header>
+
+
+
+    <main>
+      <div class="container">
