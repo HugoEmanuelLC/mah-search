@@ -132,7 +132,6 @@
             try {
                 const res = await fetch('/update-profile', {
                     method: 'PUT',
-                    body: JSON.stringify(infoUsers),
                     headers: { 'Content-Type': 'application/json' }
                 });
                 const data = await res.json();
@@ -160,6 +159,7 @@
         try {
             const res = await fetch('/delete-profile', {
                 method: 'DELETE',
+                body: JSON.stringify({_id: 0}),
                 headers: { 'Content-Type': 'application/json' }
             });
             const data = await res.json();
