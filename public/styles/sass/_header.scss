@@ -3,7 +3,9 @@ header{
     position: relative;
     text-transform: capitalize;
     @include Larges{
-        width: 250px;
+        padding-top: 20px;
+        min-width: 200px;
+        max-width: 250px;
     };
     
     .container{
@@ -19,7 +21,7 @@ header{
                 // @include borderTest(white);
 
             .photoUser{
-                border: solid 1px white;
+                border: solid 1px $color_10;
                 height: 50px;
                 width: 50px;
                 border-radius: 50%;
@@ -27,10 +29,16 @@ header{
                 overflow: hidden;
                 
                 @include Larges{
-                    margin: 30px 0;  
+                    margin: 30px auto;  
                     height: 80px;
                     width: 80px;  
                 };
+
+                img{
+                    height: 100%;
+                    width: 100%;
+                    object-fit: cover;
+                }
             }
         }
 

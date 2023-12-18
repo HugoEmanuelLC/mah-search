@@ -1,0 +1,49 @@
+
+.title_my_user{
+    margin: 20px 10px 50px;
+}
+
+.blocUserInfos{
+    // @include borderTest(red);
+    display: flex;
+    padding-left: 50px;
+    
+    .bloc_img{
+        width: 200px;
+
+        & + div{
+            // @include borderTest(green);
+            padding: 10px;
+            @include Dfx_JCsb_AIc;
+            flex-direction: column;
+        }
+    }
+
+    .bloc_infos{
+        // @include borderTest(yellow);
+        line-height: 1.8;
+        padding-left: 10px;
+
+        span{
+            font-weight: bold;
+        }
+    }
+
+    .bloc_update{
+        // @include borderTest(blue);
+        width: 100%;
+        @include Dfx_JCsa_AIc;
+
+        a{
+            background-color: $color_60;
+            color: $color_50;
+            padding: 5px 15px;
+            border-radius: 5px;
+            @include Dfx_JCc_AIc;
+            &:hover{
+                background-color: $color_10;
+                // color: $color_30;
+            }
+        }
+    }
+}

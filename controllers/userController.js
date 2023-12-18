@@ -7,7 +7,7 @@ const jwt = require('jsonwebtoken');
 module.exports.userProfile = (req, res) => {
     console.log(res.locals.user);
     const user = res.locals.user;
-
+    
     res.status(200).json(user)
 }
 
@@ -33,7 +33,8 @@ module.exports.updateUserProfile = async (req, res, next) => {
         userInfos.password = await User.findById(res.locals.user._id).password;
 
         const user = await User.findByIdAndUpdate(res.locals.user._id, userInfos);
-        res.status(200).json(user);
+        
+        res.status(200).json({user});
         // next();
 
     } catch (err) {
