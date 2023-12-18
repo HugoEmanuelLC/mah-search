@@ -62,7 +62,6 @@
                     <!-- <p>CV : <%= user.cv %></p> -->
                     <a href="/cv">C.V.</a>
                     <a href="/update-profile">Update Profile</a>
-                    <!-- <a class="delete_profile" href="/delete-profile">Delete Profile</a> -->
                 </div>
             </div>
         </div>
@@ -83,7 +82,7 @@
 
     
 
-
+// update profile
     document.addEventListener('submit', async (e) => {
         e.preventDefault();
 
@@ -132,6 +131,7 @@
             try {
                 const res = await fetch('/update-profile', {
                     method: 'PUT',
+                    body: JSON.stringify(infoUsers),
                     headers: { 'Content-Type': 'application/json' }
                 });
                 const data = await res.json();
@@ -154,24 +154,27 @@
 
 
     // delete profile
-    const deleteButton = document.querySelector('.delete');
-    deleteButton.addEventListener('click', async () => {
-        try {
-            const res = await fetch('/delete-profile', {
-                method: 'DELETE',
-                body: JSON.stringify({_id: 0}),
-                headers: { 'Content-Type': 'application/json' }
-            });
-            const data = await res.json();
-            console.log(data);
-            if (data.user) {
-                location.assign('/user-profile');
-            }else{
-                location.assign('/');
+    // const deleteButton = document.querySelector('.delete');
+        document.addEventListener('click', async (e) => {
+            if (e.target.matches('.delete')) {
+                try {
+                    const res = await fetch('/delete-profile', {
+                        method: 'DELETE',
+                        body: JSON.stringify({_id: 0}),
+                        headers: { 'Content-Type': 'application/json' }
+                    });
+                    const data = await res.json();
+                    console.log(data);
+                    if (data.user) {
+                        location.assign('/user-profile');
+                    }else{
+                        location.assign('/');
+                    }
+                }
+                catch (err) {
+                    console.log(err);
+                }
             }
-        }
-        catch (err) {
-            console.log(err);
-        }
-    });
+        });
+    
 </script>

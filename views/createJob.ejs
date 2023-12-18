@@ -5,15 +5,15 @@
       <h1>Create job</h1>
   
       <label for="jobTitle">Job title</label>
-      <input type="text" name="jobTitle" required>
+      <input type="text" name="jobTitle" >
       <div class="jobTitle error"></div>
   
       <label for="company">Company</label>
-      <input type="text" name="company" required>
+      <input type="text" name="company" >
       <div class="company error"></div>
   
       <label for="website">Website</label>
-      <input type="text" name="website" required>
+      <input type="text" name="website" >
       <div class="website error"></div>
   
       <h3>Employer's contact</h3>
@@ -62,6 +62,7 @@
       const form = document.querySelector('form');
       const jobTitleError = document.querySelector('.jobTitle.error');
       const websiteError = document.querySelector('.website.error');
+      const companyError = document.querySelector('.company.error');
       const emailError = document.querySelector('.email.error');
       const originError = document.querySelector('.origin.error');
       const statusError = document.querySelector('.status.error');
@@ -72,6 +73,7 @@
         // reset errors
         jobTitleError.textContent = '';
         websiteError.textContent = '';
+        companyError.textContent = '';
         emailError.textContent = '';
         originError.textContent = '';
         statusError.textContent = '';
@@ -88,60 +90,73 @@
         const statusJob = form.status.value;
         const comments = form.comments.value;
 
-        if (jobTitle === '' || website === '') {
-          jobTitleError.textContent = 'Please fill out the job title';
-          websiteError.textContent = 'Please fill out the website';
-          emailError.textContent = 'Please enter a valid email';
-          originError.textContent = 'Please fill out the origin';
-          statusError.textContent = 'Please fill out the status';
+        const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+        // emailRegex.length
+
+        if (jobTitle === '' || company === '') {
+
+          if (jobTitle === "") {
+            jobTitleError.textContent = 'Please fill out the job title';
+            
+          } else if (company === "") {
+            companyError.textContent = 'Please fill out the name of the company';
+          }
+          
         } else {
-          let infoJob = {
-            jobTitle,
-            website,
-            company,
-            nameContact,
-            emailContact,
-            phone,
-            Address,
-            origin,
-            statusJob,
-            comments
-          }
-          console.log(infoJob);
+                  let infoJob = {
+                    jobTitle,
+                    website,
+                    company,
+                    nameContact,
+                    emailContact,
+                    phone,
+                    Address,
+                    origin,
+                    statusJob,
+                    comments
+                  }
+          async function createJob(obj) {
 
-          try {
-            const res = await fetch('/create-job', {
-              method: 'POST',
-              body: JSON.stringify(infoJob),
-              headers: { 'Content-Type': 'application/json' }
-            });
-            const data = await res.json();
-            console.log(data);
-            if (data.errors) {
-              jobTitleError.textContent = data.errors.jobTitle;
-              websiteError.textContent = data.errors.website;
-              emailError.textContent = data.errors.email;
-              originError.textContent = data.errors.origin;
-              statusError.textContent = data.errors.status;
-              console.log(data.errors.email);
+            console.log(obj);
+
+                  try {
+                    const res = await fetch('/create-job', {
+                      method: 'POST',
+                      body: JSON.stringify(obj),
+                      headers: { 'Content-Type': 'application/json' }
+                    });
+                    const data = await res.json();
+                    console.log(data);
+                  
+                    if (data.errors) {
+                      jobTitleError.textContent = data.errors.jobTitle;
+                      websiteError.textContent = data.errors.website;
+                      emailError.textContent = data.errors.email;
+                      originError.textContent = data.errors.origin;
+                      statusError.textContent = data.errors.status;
+                      console.log(data.errors.email);
+
+                    }else {
+                      location.assign('/');
+                    }
+
+                  }
+                  catch (err) {
+                    console.log(err);
+                  }
+          }
+
+            if (emailContact.length >= 1) {
+              console.log(emailContact.length);
+              if (!emailRegex.test(emailContact)) {
+                emailError.textContent = 'Please enter a valid email';
+              }else{
+                createJob(infoJob)
+              }
+
+            } else {
+              createJob(infoJob)
             }
-            if (data.user) {
-              location.assign('/');
-            }
-
-          }
-          //   if (data.errors) {
-          //     emailError.textContent = data.errors.email;
-          //     // passwordError.textContent = data.errors.password;
-          //   }
-          //   if (data.user) {
-          //     location.assign('/');
-          //   }
-
-          // }
-          catch (err) {
-            console.log(err);
-          }
         }
       });
     </script>

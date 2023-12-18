@@ -12,7 +12,7 @@ module.exports.userProfile = (req, res) => {
 }
 
 module.exports.updateUserProfile = async (req, res, next) => {
-    //console.log(res.locals.user._id);
+    console.log(req.body);
     
     try {
         let userInfos = {

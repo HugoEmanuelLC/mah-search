@@ -25,12 +25,12 @@
     </div>
   </div>
   <div class="bloc_jobs">
-    <div class="jobs"></div>
+    <ul class="jobs"><li><h2>Aucun job dans la list</h2></li></ul>
   </div>
 
 <% } else { %> 
   <div class="bloc_jobs">
-    <h2>Aucun job dans la list</h2>
+    
   </div>
 
 <% } %>
@@ -40,16 +40,24 @@
 
 
 <script>
+const jobsList = document.querySelector('.jobs');
   async function fetchData() {
   try {
     const response = await fetch('/list-jobs');
     const data = await response.json();
     console.log(data);
-    const jobsList = document.querySelector('.jobs');
 
         data.forEach(job => {
+          jobsList.innerHTML = '';
           const listItem = document.createElement('li');
           listItem.classList.add('recipe');
+
+          const date = document.createElement('p');
+            const dateObj = new Date(job.date);
+            const day = dateObj.getDate();
+            const month = dateObj.getMonth() + 1;
+            const year = dateObj.getFullYear();
+            date.textContent = `${day}/${month}/${year}`;
 
           const title = document.createElement('h4');
           title.textContent = job.jobTitle;
@@ -57,9 +65,20 @@
           const company = document.createElement('p');
           company.textContent = job.company;
 
-          listItem.appendChild(title);
-          listItem.appendChild(company);
+          const del = document.createElement('button');
+          del.classList.add('delete');
+          del.textContent = "Delete";
+          del.setAttribute('data-id', job._id);
 
+          const see = document.createElement('button');
+          see.classList.add('see');
+          see.textContent = "See more";
+          see.setAttribute('data-id', job._id);
+
+
+
+
+          listItem.append(date, title, company, del, see);
           jobsList.appendChild(listItem);
         });
 
@@ -68,4 +87,24 @@
   }
 }
 fetchData();
+
+    // delete profile
+    document.addEventListener('click', async (e) => {
+
+        if (e.target.matches('.delete')) {
+          try {
+            const res = await fetch('/job', {
+                method: 'DELETE',
+                body: JSON.stringify({_id: e.target.dataset.id}),
+                headers: { 'Content-Type': 'application/json' }
+            });
+            const data = await res.json();
+            console.log(data);
+            location.assign('/');
+          }
+          catch (err) {
+              console.log(err);
+          }
+        }
+    });
 </script>

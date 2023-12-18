@@ -17,9 +17,6 @@ const handleErrors = (err) => {
 
 module.exports.createJob = async (req, res) => {
     let i = res.locals.user._id
-    // const obj = new ObjectId()
-    // const idString = obj.toHexString(i)
-    // console.log(idString);
 
     let jobInfos = {
         jobTitle,
@@ -35,18 +32,18 @@ module.exports.createJob = async (req, res) => {
 
     jobInfos.id_user = i
 
-    // console.log(companieInfos);
+    console.log(jobInfos);
 
     const job = await Job.create(jobInfos)
     .then(resultat => {
         console.log(resultat)
-        res.status(201).json({resultat})
+        res.status(201).json(resultat)
     })
     .catch(err => {
         // console.log(err.errors.emailContact.properties.message);
         handleErrors(err)
         const errors = handleErrors(err);
-        res.status(400).json({ errors });
+        res.status(400).json({ err });
     })
 }
 
@@ -75,7 +72,7 @@ module.exports.JobItem = async (req, res) => {
 };
 
 module.exports.updateJob = async (req, res) => {
-    const jobId = req.params.id;
+    const jobId = req.body._id;
     const jobInfos = {
         jobTitle,
         website,
