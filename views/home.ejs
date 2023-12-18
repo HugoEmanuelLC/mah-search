@@ -25,12 +25,7 @@
     </div>
   </div>
   <div class="bloc_jobs">
-    <ul class="jobs"><li><h2>Aucun job dans la list</h2></li></ul>
-  </div>
-
-<% } else { %> 
-  <div class="bloc_jobs">
-    
+    <ul class="jobs"></ul>
   </div>
 
 <% } %>
@@ -46,7 +41,8 @@ const jobsList = document.querySelector('.jobs');
     const response = await fetch('/list-jobs');
     const data = await response.json();
     console.log(data);
-        jobsList.innerHTML = '';
+    data.length === 0 ? jobsList.innerHTML = '<li><h2>Aucun job dans la list</h2></li>' : jobsList.innerHTML = '';
+    
         data.forEach(job => {
           
           const listItem = document.createElement('li');
@@ -72,7 +68,7 @@ const jobsList = document.querySelector('.jobs');
 
           const see = document.createElement('button');
           see.classList.add('see');
-          see.textContent = "See more";
+          see.textContent = "Details";
           see.setAttribute('data-id', job._id);
 
 

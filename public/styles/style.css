@@ -308,6 +308,38 @@ header .container .a_logout:hover {
   gap: 5%;
 }
 
+.bloc_jobs .jobs {
+  display: flex;
+  gap: 10px;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 10px;
+  border-radius: 5px;
+  width: 100%;
+}
+.bloc_jobs .jobs li {
+  border-radius: 20px;
+  border: solid 1px black;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-direction: column;
+  min-height: 100%;
+  width: 250px;
+  padding: 10px;
+}
+.bloc_jobs .jobs button {
+  margin: 10px 0 0;
+  padding: 5px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.bloc_jobs .jobs button:hover {
+  background-color: black;
+  color: white;
+}
+
 .title_my_user {
   margin: 20px 10px 50px;
 }
