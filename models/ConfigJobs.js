@@ -24,10 +24,12 @@ const jobSchema = new mongoose.Schema({
     },
     emailContact: {
         type: String,
+        required: false,
         lowercase: true,
+        // validate: [isEmail, 'Please enter a valid email'],
     },
     phone: { type: String },
-    address: { type: String },
+    Address: { type: String },
 
     origin: [{ type: String }],
     statusJob: [{ type: String }],

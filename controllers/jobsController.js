@@ -17,6 +17,8 @@ const handleErrors = (err) => {
 
 module.exports.createJob = async (req, res) => {
     let i = res.locals.user._id
+    
+    console.log(i);
 
     let jobInfos = {
         jobTitle,
@@ -24,7 +26,7 @@ module.exports.createJob = async (req, res) => {
         nameContact,
         emailContact,
         phone,
-        address,
+        Address,
         origin,
         statusCompanie,
         comments
@@ -34,16 +36,16 @@ module.exports.createJob = async (req, res) => {
 
     console.log(jobInfos);
 
-    const job = await Job.create({jobInfos})
+    const job = await Job.create(jobInfos)
     .then(resultat => {
-        console.log(resultat_message)
-        res.status(201).json(resultat)
+        console.log(resultat)
+        res.status(201).json({resultat})
     })
     .catch(err => {
         // console.log(err.message);
         handleErrors(err)
         const errors = handleErrors(err);
-        res.status(400).json({ err });
+        res.status(400).json({ errors });
     })
 }
 

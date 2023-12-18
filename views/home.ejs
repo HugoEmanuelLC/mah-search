@@ -46,9 +46,9 @@ const jobsList = document.querySelector('.jobs');
     const response = await fetch('/list-jobs');
     const data = await response.json();
     console.log(data);
-
+        jobsList.innerHTML = '';
         data.forEach(job => {
-          jobsList.innerHTML = '';
+          
           const listItem = document.createElement('li');
           listItem.classList.add('recipe');
 
