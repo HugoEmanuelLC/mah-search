@@ -1,5 +1,6 @@
 const User = require("../models/User");
 const jwt = require('jsonwebtoken');
+// const cloudinary = require('cloudinary').v2;
 
 // handle errors
 const handleErrors = (err) => {
@@ -39,6 +40,16 @@ const createToken = (id) => {
     expiresIn: maxAge
   });
 };
+
+
+// CLOUDINARY
+// cloudinary.config({
+//   cloud_name: 'dsvfaoan6',
+//   api_key: '729137865465158',
+//   api_secret: 'mQN39ky5UEk9uaRiQN9xAYBFwIg',
+//   secure: true,
+// });
+
 
 // controller actions
 module.exports.signup_get = (req, res) => {

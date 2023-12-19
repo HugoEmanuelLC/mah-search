@@ -67,7 +67,7 @@ const jobsList = document.querySelector('.jobs');
           del.setAttribute('data-id', job._id);
 
           const see = document.createElement('button');
-          see.classList.add('see');
+          see.classList.add('details');
           see.textContent = "Details";
           see.setAttribute('data-id', job._id);
 
@@ -97,6 +97,50 @@ fetchData();
             const data = await res.json();
             console.log(data);
             location.assign('/');
+          }
+          catch (err) {
+              console.log(err);
+          }
+        }else if(e.target.matches('.details')){
+          // CREER UN FORMULAIRE POUR MODIFIER LE JOB:
+          console.log(e.target.dataset.id);
+          try {
+            jobsList.innerHTML = '';
+            const res = await fetch('/detail-job/'+e.target.dataset.id);
+            const data = await res.json();
+            console.log(data.job);
+
+            const listItem = document.createElement('li');
+              listItem.classList.add('recipe');
+
+              const date = document.createElement('p');
+                const dateObj = new Date(data.job.date);
+                const day = dateObj.getDate();
+                const month = dateObj.getMonth() + 1;
+                const year = dateObj.getFullYear();
+                date.textContent = `${day}/${month}/${year}`;
+
+              const title = document.createElement('h4');
+              title.textContent = data.job.jobTitle;
+
+              const company = document.createElement('p');
+              company.textContent = data.job.company;
+
+              const del = document.createElement('button');
+              del.classList.add('delete');
+              del.textContent = "Delete";
+              del.setAttribute('data-id', data.job._id);
+
+              const see = document.createElement('button');
+              see.classList.add('details');
+              see.textContent = "Details";
+              see.setAttribute('data-id', data.job._id);
+
+
+
+
+              listItem.append(date, title, company, del, see);
+              jobsList.appendChild(listItem);
           }
           catch (err) {
               console.log(err);

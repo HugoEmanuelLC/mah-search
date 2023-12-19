@@ -67,7 +67,7 @@ module.exports.JobItem = async (req, res) => {
     const jobId = req.params.id; 
     try {
         const job = await Job.findById(jobId);
-        res.status(200).json(job);
+        res.status(200).json({job});
     } catch (err) {
         res.status(500).json({ error: "Job not found" });
     }

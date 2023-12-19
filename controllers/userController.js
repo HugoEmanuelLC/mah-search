@@ -3,12 +3,47 @@ const Job = require('../models/ConfigJobs');
 const authController = require('./authController');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const cloudinary = require('cloudinary').v2;
+const cld = require('../middleware/cloudinaryConfig');
+const fs = require('fs');
 
 module.exports.userProfile = (req, res) => {
     console.log(res.locals.user);
     const user = res.locals.user;
     
     res.status(200).json(user)
+}
+
+module.exports.downloadImage_get = (req, res) => {
+    res.render('download')
+}
+
+module.exports.downloadImage = async (req, res, next) => {
+    const file = req.file;
+    console.log(file);
+    cloudinary.uploader
+    .upload('./uploads/'+file.filename)
+    .then(restImg=>{
+        console.log(restImg.url);
+        const doc = User.findByIdAndUpdate({_id: res.locals.user._id}, {profilpicture: restImg.url})
+        .then(result=>{
+            console.log(result)
+            if(result){
+                fs.unlink('./uploads/'+file.filename, (err)=>{
+                    if(err){
+                        console.log(err);
+                    }
+                    else{
+                        console.log("File deleted successfully");
+                    }
+                })
+                res.status(200).redirect('/user-profile');
+            }
+        })
+        .catch(err=>console.log(err));
+        console.log(User.findById(res.locals.user._id));
+    })
+    .catch(err => console.log(err));
 }
 
 module.exports.updateUserProfile = async (req, res, next) => {

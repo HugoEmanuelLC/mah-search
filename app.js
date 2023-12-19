@@ -7,6 +7,7 @@ const dbURI = process.env.DB_URI
 const authRoutes = require('./routes/authRoutes');
 const userRoutes = require('./routes/userRoutes');
 const jobsRouter = require('./routes/jobsRoutes');
+const downloadRouter = require('./routes/downloadsRoutes');
 const cookieParser = require('cookie-parser');
 const { requireAuth, checkUser } = require('./middleware/authMiddleware');
 
@@ -21,6 +22,7 @@ app.use(cookieParser());
 app.set("views", __dirname + "/views");
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
+app.use('/uploads', express.static('uploads'));
 
 // database connection
 mongoose.connect(dbURI)
@@ -34,5 +36,6 @@ app.get('/viewJobs', requireAuth, (req, res) => res.render('viewJobs'));
 app.use(authRoutes);
 app.use(checkUser, jobsRouter);
 app.use(checkUser, userRoutes);
+app.use(checkUser, downloadRouter);
 
 module.exports = app
