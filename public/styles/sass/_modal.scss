@@ -3,24 +3,27 @@ $duration: 600ms;
 #modal{
     grid-column: 1/-1;
     background-color: $color_30;
-    backdrop-filter: blur(15px);
+    // backdrop-filter: blur(15px);
     position: absolute;
         top: 0;
-        left: 0;
-        z-index: 10;
+        left: -110%;
+        // z-index: -1;
     overflow: hidden;
+    border-radius: 20px;
+    height: 100%;
+    width: 100%;
 
-    .body_modal{
-        position: relative;
-        grid-column: 1/-1;
-        border-radius: 10px;
+    // .body_modal{
+    //     position: relative;
+    //     grid-column: 1/-1;
+    //     border-radius: 10px;
 
-        .bloc{
-            border: solid 2px red;
-            position: relative;
-            height: 100vh;
-        }
-    }
+    //     .bloc{
+    //         border: solid 2px red;
+    //         position: relative;
+    //         height: 100vh;
+    //     }
+    // }
 }
 
 .modal_active{

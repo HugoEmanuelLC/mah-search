@@ -87,6 +87,7 @@ main .container {
 
 section {
   grid-column: 1/-1;
+  position: relative;
 }
 
 header {
@@ -149,6 +150,7 @@ header .container nav ul {
     position: absolute;
     top: 0;
     left: 110vw;
+    z-index: 10;
     background-color: black;
     height: 100vh;
     width: 100vw;
@@ -240,6 +242,74 @@ header .container nav #menu ~ label:hover {
   }
 }
 header .container .a_logout:hover {
+  color: red;
+}
+
+#modal {
+  grid-column: 1/-1;
+  background-color: red;
+  position: absolute;
+  top: 0;
+  left: -110%;
+  overflow: hidden;
+  border-radius: 20px;
+  height: 100%;
+  width: 100%;
+}
+
+.modal_active {
+  animation-name: modal-on;
+  animation-duration: 600ms;
+  animation-timing-function: ease-in-out;
+  transition: 600ms;
+  height: 100%;
+  width: 100%;
+}
+
+.modal_desactive {
+  animation-name: modal-off;
+  animation-duration: 600ms;
+  animation-timing-function: ease-in-out;
+  transition: 600ms;
+  height: 0;
+  width: 0;
+}
+
+@keyframes modal-on {
+  0% {
+    border-radius: 0 50% 50% 50%;
+  }
+  100% {
+    border-radius: 0 0 0 0;
+  }
+}
+@keyframes modal-off {
+  0% {
+    border-radius: 0 0 0 0;
+  }
+  100% {
+    border-radius: 0 50% 50% 50%;
+  }
+}
+.btn_modal_off {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 15;
+  cursor: pointer;
+  border-radius: 50%;
+  padding: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.btn_modal_off i {
+  color: black;
+  margin: auto;
+  font-size: 2rem;
+  transition: 400ms;
+}
+.btn_modal_off:hover i {
   color: red;
 }
 

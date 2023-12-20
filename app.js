@@ -31,11 +31,14 @@ mongoose.connect(dbURI)
 
 // routes
 app.get('*', checkUser);
-app.get('/', (req, res) => {res.locals.user ? res.render('home') : res.render('login')});
-app.get('/viewJobs', requireAuth, (req, res) => res.render('viewJobs'));
+// app.post('*', checkUser);
+// app.delete('*', checkUser);
+app.get('/', (req, res) => {res.locals.user === null ? res.redirect('/login') : res.render('home')});
+// app.get('/jobs', requireAuth, (req, res) => res.render('home'));
 app.use(authRoutes);
 app.use(checkUser, jobsRouter);
 app.use(checkUser, userRoutes);
 app.use(checkUser, downloadRouter);
+// app.get('/viewJobs', requireAuth, (req, res) => res.render('viewJobs'));
 
 module.exports = app

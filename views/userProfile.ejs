@@ -1,4 +1,6 @@
+
 <%- include('partials/header'); -%>
+
 <section>
 
 <% if (user) { %>
@@ -81,7 +83,7 @@
     const firstnameError = document.querySelector('.firstname.error');
     const lastnameError = document.querySelector('.lastname.error');
 
-    
+    // console.log(user);
 
 // update profile
     document.addEventListener('submit', async (e) => {
@@ -136,12 +138,12 @@
                     headers: { 'Content-Type': 'application/json' }
                 });
                 const data = await res.json();
-                console.log(data);
+                console.log(data.message);
                 if (data.errors) {
                     emailError.textContent = data.errors.email;
                     passwordError.textContent = data.errors.password;
                 }
-                if (data.user) {
+                if (data.user || data.message) {
                     location.assign('/user-profile');
                 }
 
@@ -166,10 +168,11 @@
                     });
                     const data = await res.json();
                     console.log(data);
-                    if (data.user) {
-                        location.assign('/user-profile');
+                    if (data.message === 'User deleted') {
+                        console.log(data.message);
+                        // location.assign('/')
                     }else{
-                        location.assign('/');
+                        // location.assign('/');
                     }
                 }
                 catch (err) {
@@ -177,5 +180,7 @@
                 }
             }
         });
+
+        
     
 </script>

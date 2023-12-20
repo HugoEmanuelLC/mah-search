@@ -58,13 +58,14 @@ module.exports.listJobs = async (req, res) => {
         const jobs = await Job.find({id_user: id});
         console.log(jobs)
         res.status(200).json(jobs);
+        // res.render('home')
     } catch (err) {
         res.status(500).json({ error: "Failed to retrieve jobs" });
     }
 }
 
 module.exports.JobItem = async (req, res) => {
-    const jobId = req.params.id; 
+    const jobId = req.body._id; 
     try {
         const job = await Job.findById(jobId);
         res.status(200).json({job});
@@ -83,7 +84,7 @@ module.exports.updateJob = async (req, res) => {
         phone,
         Address,
         origin,
-        statusCompanie,
+        statusJob,
         comments
     } = req.body;
     try {
