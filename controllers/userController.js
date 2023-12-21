@@ -1,7 +1,7 @@
 const User = require('../models/User');
 const Job = require('../models/ConfigJobs');
 const authController = require('./authController');
-const bcrypt = require('bcryptjs')
+const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken');
 const cloudinary = require('cloudinary').v2;
 const cld = require('../middleware/cloudinaryConfig');
@@ -92,7 +92,8 @@ module.exports.deleteUserProfile = async (req, res) => {
         const user = await User.findByIdAndDelete(id)
         .then(result => {
             console.log(result);
-            res.clearCookie('jwt')
+            res.cookie('jwt', '', { maxAge: 1 });
+            // res.clearCookie('jwt')
             res.status(200).json({ message: 'User and associated jobs deleted successfully' })
         }).catch(err => console.log(err));
 
