@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 require('dotenv').config(); 
 const PORT = process.env.PORT || 3001;
 // const dbURI = process.env.MONGODB_URI || process.env.DB_URI
-const dbURI = process.env.MONGODB_URI
+const dbURI = process.env.DB_URI
 const authRoutes = require('./routes/authRoutes');
 const userRoutes = require('./routes/userRoutes');
 const jobsRouter = require('./routes/jobsRoutes');
