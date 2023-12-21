@@ -27,7 +27,7 @@
                 <input type="text" name="github" value="<%= user.github %>">
         
                 <label for="profilpicture">Profile picture</label>
-                <input type="file" class="file" name="profilpicture" value="<%= user.profilpicture %>">
+                <input type="text" class="file" name="profilpicture" value="<%= user.profilpicture %>">
         
                 <label for="cv">CV (pdf)</label>
                 <input type="text" name="cv">
@@ -50,7 +50,7 @@
         </div>
         
     <% } else { %>
-            <h2 class="title_my_user">My profiler</h2>
+            <h2 class="title_my_user">My profile</h2>
         <div class="blocUserInfos">
             <div class="bloc_img">
                 <img src="<%= user.profilpicture %>" alt="">
