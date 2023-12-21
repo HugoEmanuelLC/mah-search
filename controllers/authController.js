@@ -67,9 +67,11 @@ module.exports.signup_post = async (req, res) => {
       github,
       profilpicture, 
       cv
-    } = req.body;
+    } = await req.body;
+    
+    // userInfos.profilpicture = 'images/photoDefaul.png';
 
-    userInfos.profilpicture = 'images/photoDefaul.png';
+    userInfos.profilpicture == '' ? userInfos.profilpicture = 'images/photoDefaul.png' : null;
 
     console.log(req.body);
 
@@ -77,7 +79,7 @@ module.exports.signup_post = async (req, res) => {
 
     console.log(user);
 
-    const token = createToken(user._id);
+    const token = await createToken(user._id);
     res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
     res.status(201).json({ user: user._id });
   }

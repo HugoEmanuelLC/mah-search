@@ -10,7 +10,7 @@ const jobsRouter = require('./routes/jobsRoutes');
 const downloadRouter = require('./routes/downloadsRoutes');
 const cookieParser = require('cookie-parser');
 const { requireAuth, checkUser } = require('./middleware/authMiddleware');
-const fs = require('fs');
+
 
 const app = express();
 
@@ -18,7 +18,7 @@ const app = express();
 // app.use(express.static('public'));
 app.use(express.json());
 app.use(cookieParser());
-app.use(express.urlencoded({ extended: true }));
+// app.use(express.urlencoded({ extended: true }));
 
 // view engine
 app.set("views", __dirname + "/views");
