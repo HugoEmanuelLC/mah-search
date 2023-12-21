@@ -93,6 +93,7 @@ module.exports.deleteUserProfile = async (req, res) => {
         .then(result => {
             console.log(result);
             res.cookie('jwt', '', { maxAge: 1 });
+            // res.clearCookie('jwt')
             res.status(200).json({ message: 'User and associated jobs deleted successfully' })
         }).catch(err => console.log(err));
 
