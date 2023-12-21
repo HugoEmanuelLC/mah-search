@@ -1,6 +1,8 @@
 const User = require("../models/User");
 const jwt = require('jsonwebtoken');
 
+const fs = require('fs');
+
 // handle errors
 const handleErrors = (err) => {
   console.log(err.message, err.code);
@@ -66,6 +68,8 @@ module.exports.signup_post = async (req, res) => {
       profilpicture, 
       cv
     } = req.body;
+
+    userInfos.profilpicture = 'images/photoDefaul.png';
 
     console.log(req.body);
 

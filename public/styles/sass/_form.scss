@@ -4,7 +4,8 @@
     @include Dfx_JCc_AIc;
 
     form{
-        border: solid 1px $color_60;
+        background-color: $color_40;
+        // border: solid 1px $color_60;
         padding: 20px;
         border-radius: 20px;
         @include Dfx_JCc_AIc;
@@ -17,12 +18,14 @@
 
         label{
             width: 100%;
+            margin-top: 10px;
         }
         input{
             padding: 5px;
             text-align: center;
             border-radius: 10px;
             width: 100%;
+            border: none;
         }
         button{
             background-color: $color_30;
@@ -31,6 +34,7 @@
             width: 100%;
             border-radius: 10px;
             cursor: pointer;
+            border: none;
 
             &:hover{
                 background-color: $color_10;

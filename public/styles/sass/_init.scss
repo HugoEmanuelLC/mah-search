@@ -21,7 +21,7 @@ img{
 
 /* SCROLLBAR */
 ::-webkit-scrollbar{
-    background-color: $color_60;
+    background-color: $color_50;
     pointer-events: visible;
     width: 5px;
     height: 5px;
@@ -31,7 +31,7 @@ img{
     border-radius: 10px;
 }
 ::-webkit-scrollbar-thumb {
-    background-color: $color_30;
+    background-color: $color_40;
     border-radius: 10px;
 }
 ::-webkit-scrollbar-thumb:hover {

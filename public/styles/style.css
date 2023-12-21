@@ -24,7 +24,7 @@ img {
 
 /* SCROLLBAR */
 ::-webkit-scrollbar {
-  background-color: black;
+  background-color: white;
   pointer-events: visible;
   width: 5px;
   height: 5px;
@@ -36,7 +36,7 @@ img {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: red;
+  background-color: rgb(234, 234, 234);
   border-radius: 10px;
 }
 
@@ -48,8 +48,15 @@ body {
   background: black;
   color: white;
 }
+@media screen and (min-width: 1200px) {
+  body {
+    background-image: linear-gradient(to right, black 50%, white 50%);
+  }
+}
 
 #page {
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
   max-width: 1440px;
   margin: 0 auto;
   height: 100vh;
@@ -75,7 +82,7 @@ main .container {
   width: 100%;
   padding: 20px;
   border-radius: 50px 50px 0 0;
-  overflow-y: scroll;
+  overflow-y: auto;
   display: grid;
   grid-template-columns: minmax(5vw, 1fr) repeat(12, minmax(11px, 92.5px)) minmax(5vw, 1fr);
 }
@@ -87,7 +94,62 @@ main .container {
 
 section {
   grid-column: 1/-1;
-  position: relative;
+  padding: 50px 0;
+}
+@media screen and (max-width: 1199px) {
+  section {
+    padding: 20px 0 150px;
+  }
+}
+
+.upload {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+.upload form {
+  background-color: rgb(234, 234, 234);
+  margin: 50px 0;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+}
+.upload form input {
+  cursor: pointer;
+}
+.upload form .file {
+  background-color: white;
+  padding: 8px 20px;
+}
+.upload form .file:hover {
+  background-color: rgb(234, 234, 234);
+}
+.upload form .submit {
+  background-color: goldenrod;
+  color: white;
+  padding: 8px 20px;
+  cursor: pointer;
+  border-radius: 10px;
+}
+.upload form .submit:hover {
+  background-color: red;
+}
+.upload form div:first-child {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px;
+}
+.upload form div:first-child label {
+  margin-right: 20px;
+}
+.upload form div {
+  margin: auto;
 }
 
 header {
@@ -319,7 +381,7 @@ header .container .a_logout:hover {
   align-items: center;
 }
 .loginAnSignup form {
-  border: solid 1px black;
+  background-color: rgb(234, 234, 234);
   padding: 20px;
   border-radius: 20px;
   display: flex;
@@ -333,12 +395,14 @@ header .container .a_logout:hover {
 }
 .loginAnSignup form label {
   width: 100%;
+  margin-top: 10px;
 }
 .loginAnSignup form input {
   padding: 5px;
   text-align: center;
   border-radius: 10px;
   width: 100%;
+  border: none;
 }
 .loginAnSignup form button {
   background-color: red;
@@ -347,6 +411,7 @@ header .container .a_logout:hover {
   width: 100%;
   border-radius: 10px;
   cursor: pointer;
+  border: none;
 }
 .loginAnSignup form button:hover {
   background-color: goldenrod;
@@ -377,6 +442,23 @@ header .container .a_logout:hover {
   align-items: flex-start;
   gap: 5%;
 }
+.bloc_filters .filters form select {
+  border: solid red 5px;
+  border: none;
+  padding: 4px;
+}
+.bloc_filters .filters form button {
+  border: none;
+  background-color: goldenrod;
+  color: white;
+  padding: 4px;
+  border-radius: 4px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+.bloc_filters .filters form button:hover {
+  background-color: red;
+}
 
 .bloc_jobs .jobs {
   display: flex;
@@ -387,7 +469,7 @@ header .container .a_logout:hover {
   border-radius: 5px;
   width: 100%;
 }
-.bloc_jobs .jobs li {
+.bloc_jobs .jobs .item {
   border-radius: 20px;
   border: solid 1px black;
   display: flex;
@@ -415,11 +497,34 @@ header .container .a_logout:hover {
 }
 
 .blocUserInfos {
+  background-color: rgb(234, 234, 234);
+  padding: 20px;
   display: flex;
-  padding-left: 50px;
+}
+@media screen and (min-width: 576px) {
+  .blocUserInfos {
+    padding-left: 50px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .blocUserInfos {
+    flex-direction: column;
+  }
 }
 .blocUserInfos .bloc_img {
   width: 200px;
+}
+@media screen and (max-width: 768px) {
+  .blocUserInfos .bloc_img {
+    width: 100px;
+    height: 100px;
+  }
+  .blocUserInfos .bloc_img img {
+    height: 100%;
+    width: 100%;
+    -o-object-fit: cover;
+       object-fit: cover;
+  }
 }
 .blocUserInfos .bloc_img + div {
   padding: 10px;
@@ -431,6 +536,7 @@ header .container .a_logout:hover {
 .blocUserInfos .bloc_infos {
   line-height: 1.8;
   padding-left: 10px;
+  margin: 0 0 10px;
 }
 .blocUserInfos .bloc_infos span {
   font-weight: bold;
@@ -441,15 +547,77 @@ header .container .a_logout:hover {
   justify-content: space-around;
   align-items: center;
 }
+@media screen and (max-width: 768px) {
+  .blocUserInfos .bloc_update {
+    flex-wrap: wrap;
+  }
+}
 .blocUserInfos .bloc_update a {
   background-color: black;
   color: white;
   padding: 5px 15px;
+  margin: 10px;
   border-radius: 5px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 .blocUserInfos .bloc_update a:hover {
+  background-color: goldenrod;
+}
+
+.update_bloc form {
+  padding: 20px;
+  margin: 0 auto;
+  background-color: rgb(234, 234, 234);
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 5px;
+}
+.update_bloc input {
+  padding: 5px 10px;
+  border-radius: 5px;
+  width: 100%;
+  border: none;
+  cursor: pointer;
+}
+.update_bloc .file {
+  background-color: white;
+  padding: 8px 20px;
+  border-radius: 4px;
+}
+.update_bloc .file:hover {
+  background-color: rgb(234, 234, 234);
+}
+.update_bloc .submit {
+  background-color: goldenrod;
+  color: white;
+  padding: 8px 20px;
+  cursor: pointer;
+  border-radius: 10px;
+  border: none;
+}
+.update_bloc .submit:hover {
+  background-color: red;
+}
+.update_bloc div:first-child {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.update_bloc .delete {
+  background-color: red;
+  color: white;
+  padding: 6px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+}
+.update_bloc .delete:hover {
   background-color: goldenrod;
 }/*# sourceMappingURL=style.css.map */

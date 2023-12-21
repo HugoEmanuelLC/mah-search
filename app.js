@@ -10,6 +10,7 @@ const jobsRouter = require('./routes/jobsRoutes');
 const downloadRouter = require('./routes/downloadsRoutes');
 const cookieParser = require('cookie-parser');
 const { requireAuth, checkUser } = require('./middleware/authMiddleware');
+const fs = require('fs');
 
 const app = express();
 
@@ -22,7 +23,8 @@ app.use(cookieParser());
 app.set("views", __dirname + "/views");
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
-app.use('/uploads', express.static('uploads'));
+app.use(express.static(__dirname + '/uploads'));
+// app.use('/uploads', express.static('uploads'));
 
 // database connection
 mongoose.connect(dbURI)
