@@ -15,13 +15,13 @@
     <div class="email error"></div>
 
     <label for="github">GitHub</label>
-    <input type="text" name="github">
+    <input type="text" name="github" placeholder="Optionnel" >
 
     <label for="profilpicture">Image</label>
-    <input type="file" class="file" name="profilpicture">
+    <input type="text" class="file" name="profilpicture" placeholder="Optionnel (url d'une image)" >
 
     <label for="cv">CV (pdf)</label>
-    <input type="text" name="cv">
+    <input type="text" name="cv" placeholder="Optionnel (url du cv)" >
 
     <label for="password">Password</label>
     <input type="password" name="password" required>
@@ -83,7 +83,7 @@
         headers: {'Content-Type': 'application/json'}
       });
       const data = await res.json();
-      console.log(data);
+      // console.log(data);
       if (data.errors) {
         emailError.textContent = data.errors.email;
         passwordError.textContent = data.errors.password;
