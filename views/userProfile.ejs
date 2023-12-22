@@ -60,14 +60,15 @@
                 <div class="bloc_infos">
                     <p><span>First name :</span> <%= user.firstname %> </p>
                     <p><span>Last name :</span> <%= user.lastname %> </p>
-                    <p><span>Email :</span> <%= user.email %> </p>
-                    <p><span>Github :</span> <%= user.github %> </p>
+                    <a title="show email" href="mailto:<%= user.email %>"><span>Email :</span> <%= user.email %> </a> <br>
+                    <a title="show repos" href="<%= user.github %>" target="_blank"><span>Github :</span> <%= user.github %> </a> <br>
+                    <a title="show cv" href="<%= user.cv %>" target="_blank"><span>CV :</span><%= user.cv %></a>
                 </div>
                 <div class="bloc_update">
                     <!-- <p>CV : <%= user.cv %></p> -->
                     <a href="/upload">Change photo</a>
-                    <a href="/cv">See CV</a>
-                    <a href="/update-profile"><i class="fa-solid fa-pen-to-square"></i>Edit</a>
+                    <!-- <a href="/cv">See CV</a> -->
+                    <a href="/update-profile"><i class="fa-solid fa-pen-to-square"></i> &nbsp; Edit</a>
                 </div>
             </div>
         </div>
@@ -163,23 +164,37 @@
     // const deleteButton = document.querySelector('.delete');
         document.addEventListener('click', async (e) => {
             if (e.target.matches('.delete')) {
-                try {
-                    const res = await fetch('/delete-profile', {
-                        method: 'DELETE',
-                        body: JSON.stringify({_id: 0}),
-                        headers: { 'Content-Type': 'application/json' }
-                    });
-                    const data = await res.json();
-                    console.log(data);
-                    if (data.message ) {
-                        console.log(data.message);
-                        location.assign('/')
-                    }else{
-                        // location.assign('/');
+
+                // Define the message 
+                let message = `
+                    Are you sure you want to delete this user?
+                    all jobs will also be deleted
+                    This action cannot be undone.
+                `; 
+                // Call the window.confirm() method with the message 
+                let result = window.confirm(message);
+
+                if (result) {
+                    try {
+                        const res = await fetch('/delete-profile', {
+                            method: 'DELETE',
+                            body: JSON.stringify({_id: 0}),
+                            headers: { 'Content-Type': 'application/json' }
+                        });
+                        const data = await res.json();
+                        console.log(data);
+                        if (data.message ) {
+                            console.log(data.message);
+                            location.assign('/')
+                        }else{
+                            // location.assign('/');
+                        }
                     }
-                }
-                catch (err) {
-                    console.log(err);
+                    catch (err) {
+                        console.log(err);
+                    }
+                } else {
+                    
                 }
             }
         });

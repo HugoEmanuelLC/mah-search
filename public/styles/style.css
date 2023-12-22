@@ -104,8 +104,16 @@ section {
 
 .upload {
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+}
+.upload .information {
+  background-color: rgba(218, 165, 32, 0.524);
+  color: white;
+  max-width: 400px;
+  text-align: center;
+  padding: 10px;
 }
 .upload form {
   background-color: rgb(234, 234, 234);
@@ -481,6 +489,10 @@ header .container .a_logout:hover {
   width: 250px;
   padding: 10px;
 }
+.bloc_jobs .jobs .item .date {
+  font-size: 0.6em;
+  color: black;
+}
 .bloc_jobs .jobs button {
   margin: 10px 0 0;
   padding: 5px 20px;
@@ -537,6 +549,12 @@ header .container .a_logout:hover {
   line-height: 1.8;
   padding-left: 10px;
   margin: 0 0 10px;
+}
+.blocUserInfos .bloc_infos a {
+  text-decoration: underline;
+}
+.blocUserInfos .bloc_infos a:hover {
+  color: goldenrod;
 }
 .blocUserInfos .bloc_infos span {
   font-weight: bold;

@@ -89,9 +89,10 @@ const jobsList = document.querySelector('.jobs');
 
   function createHtml(job) {
           const listItem = document.createElement('div');
-          listItem.classList.add('recipe');
+          listItem.classList.add('item');
 
           const date = document.createElement('p');
+          date.classList.add('date');
             const dateObj = new Date(job.date);
             const day = dateObj.getDate();
             const month = dateObj.getMonth() + 1;
@@ -111,11 +112,11 @@ const jobsList = document.querySelector('.jobs');
           status.textContent = job.statusJob;
 
           const comment = document.createElement('p');
-          comment.textContent = job.comment;
+          comment.textContent = job.comments;
 
           const del = document.createElement('button');
           del.classList.add('delete');
-          del.textContent = "Delete";
+          del.innerHTML = '<i class="fa-solid fa-trash"></i>';
           del.setAttribute('data-id', job._id);
 
           const details = document.createElement('button');
@@ -123,7 +124,7 @@ const jobsList = document.querySelector('.jobs');
           details.textContent = "Details";
           details.setAttribute('data-id', job._id);
 
-          listItem.append(date, title, company, origin, status, comment, del, details);
+          listItem.append(date, title, company, origin, status, comment, del);
           jobsList.appendChild(listItem);
   }
 
@@ -131,18 +132,30 @@ const jobsList = document.querySelector('.jobs');
     document.addEventListener('click', async (e) => {
 
         if (e.target.matches('.delete')) {
-          try {
-            const res = await fetch('/job', {
-                method: 'DELETE',
-                body: JSON.stringify({_id: e.target.dataset.id}),
-                headers: { 'Content-Type': 'application/json' }
-            });
-            const data = await res.json();
-            console.log(data);
-            location.assign('/');
-          }
-          catch (err) {
-              console.log(err);
+          // Define the message 
+          let message = `
+              Are you sure you want to delete this job?
+              all information will be deleted
+              This action cannot be undone.
+          `; 
+          // Call the window.confirm() method with the message 
+          let result = window.confirm(message);
+          if (result) {
+            try {
+              const res = await fetch('/job', {
+                  method: 'DELETE',
+                  body: JSON.stringify({_id: e.target.dataset.id}),
+                  headers: { 'Content-Type': 'application/json' }
+              });
+              const data = await res.json();
+              console.log(data);
+              location.assign('/');
+            }
+            catch (err) {
+                console.log(err);
+            }
+          } else {
+            
           }
 
         }else if(e.target.matches('.details')){

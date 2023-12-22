@@ -1,6 +1,11 @@
 <%- include('partials/header'); -%>
 
 <section class="upload">
+    <div class="information">
+        <h3>Note: </h3>
+        <p>on vercel the upload of the image may not work, change the image in "profile -> edit"</p>
+    </div>
+    
     <form method="POST" action="/upload" enctype="multipart/form-data">
         <div>
             <label>Upload profile picture</label>

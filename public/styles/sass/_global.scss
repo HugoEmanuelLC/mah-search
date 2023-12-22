@@ -53,7 +53,16 @@ section{
 
 .upload{
     // @include borderTest(blue);
-    @include Dfx_JCc_AIfs;
+    @include Dfx_JCfs_AIc;
+    flex-direction: column;
+
+    .information{
+        background-color: rgba(218, 165, 32, 0.524);
+        color: $color_50;
+        max-width: 400px;
+        text-align: center;
+        padding: 10px;
+    }
 
     form{
         // @include borderTest(green);
