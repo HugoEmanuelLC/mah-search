@@ -318,14 +318,11 @@ header .container .a_logout:hover {
 
 #modal {
   grid-column: 1/-1;
-  background-color: red;
+  background-color: white;
   position: absolute;
   top: 0;
-  left: -110%;
   overflow: hidden;
   border-radius: 20px;
-  height: 100%;
-  width: 100%;
 }
 #modal .body_modal {
   position: relative;
@@ -333,7 +330,6 @@ header .container .a_logout:hover {
   border-radius: 10px;
 }
 #modal .body_modal .bloc {
-  border: solid 2px red;
   position: relative;
   height: 100vh;
 }

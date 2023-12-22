@@ -1,9 +1,17 @@
 <%- include('partials/header'); -%>
 
 <section>
-  <div id="modal">
-    
-  </div>
+  <div id="modal" class="modal_desactive">
+    <div class="body_modal">
+        <a class="btn_modal_off">
+            <i class='bx bx-log-out-circle'></i>
+        </a>
+        
+        <div class="bloc">
+
+        </div>
+    </div>
+</div>
 
 
   <h2>List de jobs :</h2>
@@ -53,7 +61,7 @@ let tableauListJobs = [];
 let form = document.querySelector('form')
 const jobsList = document.querySelector('.jobs');
 
-  async function fetchData(status = "", origin = "") {
+  async function fetchData(status = "", origin = "", id = 0) {
     try {
       const response = await fetch('/list-jobs');
       const data = await response.json();
@@ -62,7 +70,14 @@ const jobsList = document.querySelector('.jobs');
         jobsList.innerHTML = '<p>No jobs found</p>';
 
       } else {
-          tableauListJobs = [];
+          if (id != 0) {
+            data.forEach(job => {
+              if (id == job._id) {
+                
+              }
+            });
+          } else {
+            tableauListJobs = [];
           jobsList.innerHTML = '';
 
         if (status !== "" || origin !== "") {
@@ -83,6 +98,7 @@ const jobsList = document.querySelector('.jobs');
             createHtml(job);
           });
         }
+          }
       }
       
     } catch (error) {
@@ -125,7 +141,7 @@ const jobsList = document.querySelector('.jobs');
           del.setAttribute('data-id', job._id);
 
           const details = document.createElement('button');
-          details.classList.add('details');
+          details.classList.add('btn_modal_on');
           details.textContent = "Details";
           details.setAttribute('data-id', job._id);
 
@@ -177,7 +193,98 @@ const jobsList = document.querySelector('.jobs');
 
 
 
-    // modal
-    const modal = document.querySelector('.modal');
+    // MODAL CONTENUE
+let modal = document.querySelector('#modal')
+let body_modal = modal.querySelector('.body_modal')
+let btn_modal_off = document.querySelector('.btn_modal_off')
+
+const modalOnOff = () => {
+    if (modal.matches('.modal_active')) {
+        modal.classList.remove('modal_active')
+        modal.classList.add('modal_desactive')
+    } else {
+        modal.classList.remove('modal_desactive')
+        modal.classList.add('modal_active')
+    }
+}
+
+btn_modal_off.addEventListener('click', modalOnOff)
+
+document.addEventListener('click', (e) => {
+    if (e.target.matches('.btn_modal_on')) {
+        body_modal.querySelector('.bloc').innerHTML = ''
+      // htmlModalItem(tableauListJobs[e.target.dataset.id])
+      tableauListJobs.forEach(job => {
+        if (job._id == e.target.dataset.id) {
+          htmlModalItem(job)
+        }
+      })
+        modalOnOff()
+    }
+})
+
+function htmlModalItem(job) {
+    const form = document.createElement('form')
+    const labelDate = document.createElement('label')
+    const date = document.createElement('input')
+    const labelTitle = document.createElement('label')
+    const title = document.createElement('input')
+    const labelCompany = document.createElement('label')
+    const company = document.createElement('input')
+    const labelOrigin = document.createElement('label')
+    const origin = document.createElement('input')
+    const labelStatus = document.createElement('label')
+    const status = document.createElement('input')
+    const labelComment = document.createElement('label')
+    const comment = document.createElement('textarea')
+    const btnSubmit = document.createElement('button')
+
+    form.classList.add('form_modal')
+    labelDate.textContent = 'Date'
+    date.setAttribute('type', 'date')
+    date.setAttribute('name', 'date')
+    date.setAttribute('value', job.date)
+    labelTitle.textContent = 'Title'
+    title.setAttribute('type', 'text')
+    title.setAttribute('name', 'title')
+    title.setAttribute('value', job.jobTitle)
+    labelCompany.textContent = 'Company'
+    company.setAttribute('type', 'text')
+    company.setAttribute('name', 'company')
+    company.setAttribute('value', job.company)
+    labelOrigin.textContent = 'Origin'
+    origin.setAttribute('type', 'text')
+    origin.setAttribute('name', 'origin')
+    origin.setAttribute('value', job.origin)
+    labelStatus.textContent = 'Status'
+    status.setAttribute('type', 'text')
+    status.setAttribute('name', 'status')
+    status.setAttribute('value', job.statusJob)
+    labelComment.textContent = 'Comment'
+    comment.setAttribute('name', 'comment')
+    comment.textContent = job.comments
+    btnSubmit.setAttribute('type', 'submit')
+    btnSubmit.textContent = 'Update'
+
+    form.append(labelDate, date, labelTitle, title, labelCompany, company, labelOrigin, origin, labelStatus, status, labelComment, comment, btnSubmit)
+    body_modal.querySelector('.bloc').appendChild(form)
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault()
+        try {
+            const res = await fetch('/job', {
+                method: 'PUT',
+                body: JSON.stringify({_id: job._id, date: date.value, title: title.value, company: company.value, origin: origin.value, status: status.value, comment: comment.value}),
+                headers: { 'Content-Type': 'application/json' }
+            })
+            const data = await res.json()
+            console.log(data)
+            location.assign('/')
+        }
+        catch (err) {
+            console.log(err)
+        }
+    })
+}
 
 </script>
