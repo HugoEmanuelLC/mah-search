@@ -269,22 +269,22 @@ function htmlModalItem(job) {
     form.append(labelDate, date, labelTitle, title, labelCompany, company, labelOrigin, origin, labelStatus, status, labelComment, comment, btnSubmit)
     body_modal.querySelector('.bloc').appendChild(form)
 
-    form.addEventListener('submit', async (e) => {
-        e.preventDefault()
-        try {
-            const res = await fetch('/job', {
-                method: 'PUT',
-                body: JSON.stringify({_id: job._id, date: date.value, title: title.value, company: company.value, origin: origin.value, status: status.value, comment: comment.value}),
-                headers: { 'Content-Type': 'application/json' }
-            })
-            const data = await res.json()
-            console.log(data)
-            location.assign('/')
-        }
-        catch (err) {
-            console.log(err)
-        }
-    })
+    // form.addEventListener('submit', async (e) => {
+    //     e.preventDefault()
+    //     try {
+    //         const res = await fetch('/job', {
+    //             method: 'PUT',
+    //             body: JSON.stringify({_id: job._id, date: date.value, title: title.value, company: company.value, origin: origin.value, status: status.value, comment: comment.value}),
+    //             headers: { 'Content-Type': 'application/json' }
+    //         })
+    //         const data = await res.json()
+    //         console.log(data)
+    //         location.assign('/')
+    //     }
+    //     catch (err) {
+    //         console.log(err)
+    //     }
+    // })
 }
 
 </script>
