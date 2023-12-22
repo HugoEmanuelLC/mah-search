@@ -51,12 +51,12 @@ module.exports.createJob = async (req, res) => {
 
 
 module.exports.listJobs = async (req, res) => {
-    console.log( res.locals.user._id);
+    // console.log( res.locals.user._id);
     try {
         const id = res.locals.user._id
-        console.log(id)
+        // console.log(id)
         const jobs = await Job.find({id_user: id});
-        console.log(jobs)
+        // console.log(jobs)
         res.status(200).json(jobs);
         // res.render('home')
     } catch (err) {
@@ -75,9 +75,11 @@ module.exports.JobItem = async (req, res) => {
 };
 
 module.exports.updateJob = async (req, res) => {
-    const jobId = req.body._id;
+    const jobId = req.params.id;
+    console.log(jobId);
     const jobInfos = {
         jobTitle,
+        company,
         website,
         nameContact,
         emailContact,
@@ -85,10 +87,12 @@ module.exports.updateJob = async (req, res) => {
         Address,
         origin,
         statusJob,
-        comments
+        comments,
+        date
     } = req.body;
+    console.log(jobInfos);
     try {
-        const job = await Job.findByIdAndUpdate(jobId, jobInfos, { new: true });
+        const job = await Job.findByIdAndUpdate(jobId, jobInfos);
         res.status(200).json(job);
     } catch (err) {
         res.status(500).json({ error: "Job not found" });

@@ -10,7 +10,7 @@ router.post('/create-job', jobsController.createJob)
 router.get('/list-jobs', jobsController.listJobs)
 router.post('/detail-job', jobsController.JobItem)
 // router.get('/job/:id', (req, res) => res.render('home'))
-router.put('/job', jobsController.updateJob)
+router.put('/job/:id', jobsController.updateJob)
 router.delete('/job', jobsController.deleteJob)
 
 module.exports = router;

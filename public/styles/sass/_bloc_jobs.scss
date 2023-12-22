@@ -16,7 +16,8 @@
 
         .item{
             border-radius: 20px;
-            border: solid 1px $color_60;
+            background-color: $color_40;
+            // border: solid 1px $color_60;
             display: flex;
                 flex-direction: column;
                 justify-content: space-between;

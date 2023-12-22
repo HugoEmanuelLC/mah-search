@@ -109,48 +109,50 @@ const jobsList = document.querySelector('.jobs');
   fetchData();
 
   function createHtml(job) {
-          const listItem = document.createElement('div');
-          listItem.classList.add('item');
+    const listItem = document.createElement('div');
+    listItem.classList.add('item');
 
-          const date = document.createElement('p');
-          date.classList.add('date');
-            const dateObj = new Date(job.date);
-            const day = dateObj.getDate();
-            const month = dateObj.getMonth() + 1;
-            const year = dateObj.getFullYear();
-            date.textContent = `${day}/${month}/${year}`;
+    const date = document.createElement('p');
+    date.classList.add('date');
+      const dateObj = new Date(job.date);
+      const day = dateObj.getDate();
+      const month = dateObj.getMonth() + 1;
+      const year = dateObj.getFullYear();
+      date.textContent = `${day}/${month}/${year}`;
 
-          const title = document.createElement('h4');
-          title.textContent = job.jobTitle;
+    const title = document.createElement('h4');
+    title.textContent = job.jobTitle;
 
-          const company = document.createElement('p');
-          company.textContent = job.company;
+    const company = document.createElement('p');
+    company.textContent = job.company;
 
-          const origin = document.createElement('p');
-          origin.textContent = job.origin;
+    const origin = document.createElement('p');
+    origin.textContent = job.origin;
 
-          const status = document.createElement('p');
-          status.textContent = job.statusJob;
+    const status = document.createElement('p');
+    status.textContent = job.statusJob;
 
-          const comment = document.createElement('p');
-          comment.textContent = job.comments;
+    const comment = document.createElement('p');
+    comment.textContent = job.comments;
 
-          const del = document.createElement('button');
-          del.classList.add('delete');
-          del.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
-          del.setAttribute('data-id', job._id);
+    const del = document.createElement('button');
+    del.classList.add('delete');
+    del.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
+    del.setAttribute('data-id', job._id);
 
-          const details = document.createElement('button');
-          details.classList.add('btn_modal_on');
-          details.textContent = "Details";
-          details.setAttribute('data-id', job._id);
+    const details = document.createElement('button');
+    details.classList.add('btn_modal_on');
+    details.textContent = "Details";
+    details.setAttribute('data-id', job._id);
 
-          listItem.append(date, title, company, origin, status, comment, del);
-          jobsList.appendChild(listItem);
+    listItem.append(date, title, company, origin, status, comment, del, details);
+    jobsList.appendChild(listItem);
   }
 
     // delete | detail => profile
     document.addEventListener('click', async (e) => {
+      // console.log(e.target.matches('.btn_submit'));
+      // e.preventDefault();
 
         if (e.target.matches('.delete')) {
           // Define the message 
@@ -179,8 +181,39 @@ const jobsList = document.querySelector('.jobs');
             
           }
 
-        }else if(e.target.matches('.details')){
-          
+        }
+        else if(e.target.matches('.btn_submit')){
+          e.preventDefault();
+          console.log("clique");
+          let form_modal = document.querySelector('form.form_modal');
+          console.log(form_modal.jobTitle.value);
+          let infoJob = {
+            jobTitle: form_modal.jobTitle.value,
+            company: form_modal.company.value,
+            website: form_modal.website.value,
+            nameContact: form_modal.nameContact.value,
+            emailContact: form_modal.emailContact.value,
+            phone: form_modal.phone.value,
+            Address: form_modal.Address.value,
+            origin: form_modal.origin.value,
+            statusJob: form_modal.statusJob.value,
+            comments: form_modal.comments.value,
+            date: form_modal.date.value
+          }
+          console.log(infoJob);
+          try {
+            const res = await fetch('/job/'+e.target.dataset.id, {
+                method: 'PUT',
+                body: JSON.stringify(infoJob),
+                headers: { 'Content-Type': 'application/json' }
+            });
+            const data = await res.json();
+            console.log(data);
+            location.assign('/');
+          }
+          catch (err) {
+              console.log(err);
+          }
         }
     });
 
@@ -212,79 +245,127 @@ btn_modal_off.addEventListener('click', modalOnOff)
 
 document.addEventListener('click', (e) => {
     if (e.target.matches('.btn_modal_on')) {
-        body_modal.querySelector('.bloc').innerHTML = ''
+      body_modal.querySelector('.bloc').innerHTML = ''
       // htmlModalItem(tableauListJobs[e.target.dataset.id])
       tableauListJobs.forEach(job => {
         if (job._id == e.target.dataset.id) {
           htmlModalItem(job)
         }
       })
-        modalOnOff()
+      modalOnOff()
     }
 })
 
-function htmlModalItem(job) {
-    const form = document.createElement('form')
-    const labelDate = document.createElement('label')
-    const date = document.createElement('input')
-    const labelTitle = document.createElement('label')
-    const title = document.createElement('input')
-    const labelCompany = document.createElement('label')
-    const company = document.createElement('input')
-    const labelOrigin = document.createElement('label')
-    const origin = document.createElement('input')
-    const labelStatus = document.createElement('label')
-    const status = document.createElement('input')
-    const labelComment = document.createElement('label')
-    const comment = document.createElement('textarea')
-    const btnSubmit = document.createElement('button')
+async function htmlModalItem(job) {
+  const form = document.createElement('form')
 
-    form.classList.add('form_modal')
-    labelDate.textContent = 'Date'
-    date.setAttribute('type', 'date')
-    date.setAttribute('name', 'date')
-    date.setAttribute('value', job.date)
-    labelTitle.textContent = 'Title'
-    title.setAttribute('type', 'text')
-    title.setAttribute('name', 'title')
-    title.setAttribute('value', job.jobTitle)
-    labelCompany.textContent = 'Company'
-    company.setAttribute('type', 'text')
-    company.setAttribute('name', 'company')
-    company.setAttribute('value', job.company)
-    labelOrigin.textContent = 'Origin'
-    origin.setAttribute('type', 'text')
-    origin.setAttribute('name', 'origin')
-    origin.setAttribute('value', job.origin)
-    labelStatus.textContent = 'Status'
-    status.setAttribute('type', 'text')
-    status.setAttribute('name', 'status')
-    status.setAttribute('value', job.statusJob)
-    labelComment.textContent = 'Comment'
-    comment.setAttribute('name', 'comment')
-    comment.textContent = job.comments
-    btnSubmit.setAttribute('type', 'submit')
-    btnSubmit.textContent = 'Update'
+  const labelTitle = document.createElement('label')
+  const jobTitle = document.createElement('input')
 
-    form.append(labelDate, date, labelTitle, title, labelCompany, company, labelOrigin, origin, labelStatus, status, labelComment, comment, btnSubmit)
-    body_modal.querySelector('.bloc').appendChild(form)
+  const labelCompany = document.createElement('label')
+  const company = document.createElement('input')
 
-    // form.addEventListener('submit', async (e) => {
-    //     e.preventDefault()
-    //     try {
-    //         const res = await fetch('/job', {
-    //             method: 'PUT',
-    //             body: JSON.stringify({_id: job._id, date: date.value, title: title.value, company: company.value, origin: origin.value, status: status.value, comment: comment.value}),
-    //             headers: { 'Content-Type': 'application/json' }
-    //         })
-    //         const data = await res.json()
-    //         console.log(data)
-    //         location.assign('/')
-    //     }
-    //     catch (err) {
-    //         console.log(err)
-    //     }
-    // })
+  const labelWebsite = document.createElement('label')
+  const website = document.createElement('input')
+
+  const labelNameContact = document.createElement('label')
+  const nameContact = document.createElement('input')
+
+  const labelEmailContact = document.createElement('label')
+  const emailContact = document.createElement('input')
+
+  const labelPhone = document.createElement('label')
+  const phone = document.createElement('input')
+
+  const labelAddress = document.createElement('label')
+  const Address = document.createElement('input')
+
+  const labelOrigin = document.createElement('label')
+  const origin = document.createElement('input')
+
+  const labelStatus = document.createElement('label')
+  const statusJob = document.createElement('input')
+
+  const labelComments = document.createElement('label')
+  const comments = document.createElement('textarea')
+
+  const labelDate = document.createElement('label')
+  const date = document.createElement('input')
+
+  const btnSubmit = document.createElement('button')
+
+  form.classList.add('form_modal')
+
+  labelTitle.textContent = 'Title'
+  jobTitle.setAttribute('type', 'text')
+  jobTitle.setAttribute('name', 'jobTitle')
+  jobTitle.setAttribute('value', job.jobTitle)
+  
+  labelCompany.textContent = 'Company'
+  company.setAttribute('type', 'text')
+  company.setAttribute('name', 'company')
+  company.setAttribute('value', job.company)
+
+  labelWebsite.textContent = 'Website'
+  website.setAttribute('type', 'text')
+  website.setAttribute('name', 'website') 
+  website.setAttribute('value', job.website)
+
+  labelNameContact.textContent = 'Name Contact'
+  nameContact.setAttribute('type', 'text')
+  nameContact.setAttribute('name', 'nameContact')
+  nameContact.setAttribute('value', job.nameContact)
+
+  labelEmailContact.textContent = 'Email Contact'
+  emailContact.setAttribute('type', 'text')
+  emailContact.setAttribute('name', 'emailContact')
+  emailContact.setAttribute('value', job.emailContact)
+
+  labelPhone.textContent = 'Phone'
+  phone.setAttribute('type', 'text')
+  phone.setAttribute('name', 'phone')
+  phone.setAttribute('value', job.phone)
+
+  labelAddress.textContent = 'Address'
+  Address.setAttribute('type', 'text')
+  Address.setAttribute('name', 'Address')
+  Address.setAttribute('value', job.Address)
+
+  labelOrigin.textContent = 'Origin'
+  origin.setAttribute('type', 'text')
+  origin.setAttribute('name', 'origin')
+  origin.setAttribute('value', job.origin)
+
+  labelStatus.textContent = 'Status'
+  statusJob.setAttribute('type', 'text')
+  statusJob.setAttribute('name', 'statusJob')
+  statusJob.setAttribute('value', job.statusJob)
+
+  labelComments.textContent = 'Comments'
+  comments.setAttribute('name', 'comments')
+  comments.textContent = job.comments
+
+  // config date
+
+      const dateObj = new Date(job.date);
+      const day = dateObj.getDate();
+      const month = dateObj.getMonth() + 1;
+      const year = dateObj.getFullYear();
+
+  // 
+
+  labelDate.textContent =  `Date ${day}/${month}/${year}`
+  date.setAttribute('type', 'date')
+  date.setAttribute('name', 'date')
+  date.setAttribute('value', job.date)
+
+  btnSubmit.setAttribute('type', 'submit')
+  btnSubmit.textContent = 'Update'
+  btnSubmit.classList.add('btn_submit')
+  btnSubmit.setAttribute('data-id', job._id)
+
+  form.append(labelTitle, jobTitle, labelCompany, company, labelWebsite, website, labelNameContact, nameContact, labelEmailContact, emailContact, labelPhone, phone, labelAddress, Address, labelOrigin, origin, labelStatus, statusJob, labelComments, comments, labelDate, date, btnSubmit)
+  body_modal.querySelector('.bloc').appendChild(form)
 }
 
 </script>

@@ -318,11 +318,11 @@ header .container .a_logout:hover {
 
 #modal {
   grid-column: 1/-1;
-  background-color: white;
-  position: absolute;
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+  position: fixed;
   top: 0;
-  overflow: hidden;
-  border-radius: 20px;
+  overflow: auto;
 }
 #modal .body_modal {
   position: relative;
@@ -331,7 +331,53 @@ header .container .a_logout:hover {
 }
 #modal .body_modal .bloc {
   position: relative;
-  height: 100vh;
+  min-height: 100vh;
+}
+#modal .body_modal .bloc form {
+  background-color: rgb(234, 234, 234);
+  padding: 20px;
+  margin: 50px 0 0 200px;
+  max-width: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+#modal .body_modal .bloc form .error {
+  color: goldenrod;
+  margin-bottom: 10px;
+}
+#modal .body_modal .bloc form label {
+  width: 100%;
+  margin-top: 10px;
+}
+#modal .body_modal .bloc form input {
+  padding: 5px;
+  text-align: center;
+  border-radius: 10px;
+  width: 100%;
+  border: none;
+}
+#modal .body_modal .bloc form button {
+  background-color: red;
+  color: white;
+  padding: 10px;
+  margin-top: 10px;
+  width: 100%;
+  border-radius: 10px;
+  cursor: pointer;
+  border: none;
+}
+#modal .body_modal .bloc form button:hover {
+  background-color: goldenrod;
+  color: red;
+}
+#modal .body_modal .bloc form p {
+  font-size: 12px;
+}
+#modal .body_modal .bloc form p a {
+  color: red;
+  text-decoration: underline;
 }
 
 .modal_active {
@@ -341,6 +387,7 @@ header .container .a_logout:hover {
   transition: 600ms;
   height: 100%;
   width: 100%;
+  padding: 10px;
 }
 
 .modal_desactive {
@@ -399,10 +446,6 @@ header .container .a_logout:hover {
   background-color: rgb(234, 234, 234);
   padding: 20px;
   border-radius: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
 }
 .loginAnSignup form .error {
   color: goldenrod;
@@ -486,7 +529,7 @@ header .container .a_logout:hover {
 }
 .bloc_jobs .jobs .item {
   border-radius: 20px;
-  border: solid 1px black;
+  background-color: rgb(234, 234, 234);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
