@@ -13,17 +13,17 @@ $duration: 600ms;
     height: 100%;
     width: 100%;
 
-    // .body_modal{
-    //     position: relative;
-    //     grid-column: 1/-1;
-    //     border-radius: 10px;
+    .body_modal{
+        position: relative;
+        grid-column: 1/-1;
+        border-radius: 10px;
 
-    //     .bloc{
-    //         border: solid 2px red;
-    //         position: relative;
-    //         height: 100vh;
-    //     }
-    // }
+        .bloc{
+            border: solid 2px red;
+            position: relative;
+            height: 100vh;
+        }
+    }
 }
 
 .modal_active{

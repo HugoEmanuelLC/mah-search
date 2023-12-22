@@ -1,6 +1,11 @@
 <%- include('partials/header'); -%>
 
 <section>
+  <div id="modal">
+    
+  </div>
+
+
   <h2>List de jobs :</h2>
 <% if (user) { %>
   <div class="bloc_filters">
@@ -116,7 +121,7 @@ const jobsList = document.querySelector('.jobs');
 
           const del = document.createElement('button');
           del.classList.add('delete');
-          del.innerHTML = '<i class="fa-solid fa-trash"></i>';
+          del.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
           del.setAttribute('data-id', job._id);
 
           const details = document.createElement('button');
@@ -167,4 +172,12 @@ const jobsList = document.querySelector('.jobs');
       e.preventDefault();
       fetchData(form.filterStatus.value, form.filterOrigin.value);
     })
+
+
+
+
+
+    // modal
+    const modal = document.querySelector('.modal');
+
 </script>

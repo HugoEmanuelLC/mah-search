@@ -1,9 +1,9 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@200;400;700&display=swap");
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Inter", sans-serif;
+  font-family: "Oswald", sans-serif;
   scroll-behavior: smooth;
   transition: 0.2s;
 }
@@ -94,6 +94,7 @@ main .container {
 
 section {
   grid-column: 1/-1;
+  position: relative;
   padding: 50px 0;
 }
 @media screen and (max-width: 1199px) {
@@ -326,6 +327,16 @@ header .container .a_logout:hover {
   height: 100%;
   width: 100%;
 }
+#modal .body_modal {
+  position: relative;
+  grid-column: 1/-1;
+  border-radius: 10px;
+}
+#modal .body_modal .bloc {
+  border: solid 2px red;
+  position: relative;
+  height: 100vh;
+}
 
 .modal_active {
   animation-name: modal-on;
@@ -491,6 +502,10 @@ header .container .a_logout:hover {
 }
 .bloc_jobs .jobs .item .date {
   font-size: 0.6em;
+  color: black;
+}
+.bloc_jobs .jobs .item p {
+  font-size: 0.9em;
   color: black;
 }
 .bloc_jobs .jobs button {

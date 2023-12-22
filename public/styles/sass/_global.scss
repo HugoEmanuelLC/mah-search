@@ -44,7 +44,7 @@ main{
 section{
     // @include borderTest(red);
     grid-column: 1/-1;
-    // position: relative;
+    position: relative;
     padding: 50px 0;
     @include Larges_max{
         padding: 20px 0 150px;
