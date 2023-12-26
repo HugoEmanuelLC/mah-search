@@ -2,7 +2,7 @@ $duration: 600ms;
 
 #modal{
     grid-column: 1/-1;
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(15px);
     // border: solid 2px red;
     // background-color: $color_50;
     // backdrop-filter: blur(15px);
@@ -33,7 +33,7 @@ $duration: 600ms;
                 background-color: $color_40;
                 // border: solid 1px $color_60;
                 padding: 20px;
-                margin: 50px 0 0 200px;
+                margin: 50px auto;
                 // border-radius: 20px;
                 max-width: 500px;
                 @include Dfx_JCc_AIc;

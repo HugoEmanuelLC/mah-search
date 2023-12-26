@@ -318,8 +318,8 @@ header .container .a_logout:hover {
 
 #modal {
   grid-column: 1/-1;
-  -webkit-backdrop-filter: blur(10px);
-          backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(15px);
+          backdrop-filter: blur(15px);
   position: fixed;
   top: 0;
   overflow: auto;
@@ -336,7 +336,7 @@ header .container .a_logout:hover {
 #modal .body_modal .bloc form {
   background-color: rgb(234, 234, 234);
   padding: 20px;
-  margin: 50px 0 0 200px;
+  margin: 50px auto;
   max-width: 500px;
   display: flex;
   justify-content: center;
